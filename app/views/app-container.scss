@@ -1,0 +1,42 @@
+@import "../styles/components/variables.scss";
+
+
+// 全局属性
+.container {
+}
+
+.navContainer {
+	display: flex;
+	flex-direction: column;	
+	width: 240px;
+	height: 100%;
+	float: left;
+}
+
+
+.pageContainer {
+	height: 100%;
+
+	margin-left: 240px;
+	background-color: $page-background-color;
+}
+
+.logoContainer {
+	width: 100%;
+	height: 64px;
+	flex: 0 64px;
+
+	text-align: center;
+	line-height: 64px;
+	font-size: 1.5em;
+	vertical-align: middle;
+	color: white;
+	background-color: $logo-color;
+}
+
+.navListWrapper {
+	flex: 1;
+	background: $nav-background-color;
+	box-shadow: 2px 0 2px $light-gray-color;
+	z-index: 10;
+}

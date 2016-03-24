@@ -1,0 +1,69 @@
+@import "../../styles/components/variables.scss";
+
+.container {
+	margin-top: 2rem;
+}
+
+.composeWrapper,
+.resourceWrapper,
+.websiteWrapper {
+	margin-top: 2rem;
+	color: $gray-white-color;
+
+	&:before {
+		display: block;
+		margin: 0 1.5rem;
+		padding: .5rem 1rem;
+
+		font-size: 14px;
+		border-bottom: 1px solid $deep-gray-color; 
+	}
+
+	ul {
+		list-style: none;
+		margin-top: .5rem;
+
+		-webkit-margin-after: 0;
+	    -webkit-padding-start: 0;
+
+		li {
+			padding: .6rem 2.5rem;
+
+			cursor: pointer;
+
+			&:hover{
+				position: relative;
+				background-color: $nav-background-light-color;
+
+				&:before {
+					position: absolute;
+					content: "";
+					top: 0;
+					left: 0;
+					width: 4px;
+					height: 100%;
+					background-color: $primary-color;
+				}
+			}
+		}
+	}
+
+	
+}
+
+.fa {
+	margin-right: 1rem;
+}
+
+.composeWrapper::before {
+	content: '创作区';
+}
+
+.resourceWrapper::before {
+	content: '资源区';
+}
+
+.websiteWrapper::before {
+	content: '网站设置区';
+}
+
