@@ -21,12 +21,15 @@ export default class ArticleCard extends React.Component {
 				</div>
 				<div className={styles.rightWrapper}>
 					<div className={styles.info}>
-						<span className={styles.viewed}>{article.viewed} 人看过</span>
 						<span className={styles.datetime}>{article.datetime}</span>
+						<span className={styles.viewed}>{article.viewed} 人看过</span>
 						<span className={styles.articleType}>{article.type}</span>
 					</div>
 					<div className={styles.title}>
 						{article.title}
+					</div>
+					<div className={styles.spread}>
+						展开
 					</div>
 				</div>
 
