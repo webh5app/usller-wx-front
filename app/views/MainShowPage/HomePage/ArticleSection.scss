@@ -1,0 +1,22 @@
+.container {
+  margin: 2rem 0;
+}
+
+.timeLine {
+  position: relative;
+  display: inline-block;
+  padding-left: .8rem;
+
+  font-size: 0.9em;
+  color: #999;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 0;
+    width: 4px;
+    background: #63CFFF;
+  }
+}

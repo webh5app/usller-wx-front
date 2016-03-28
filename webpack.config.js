@@ -22,7 +22,7 @@ const common = {
 		path: PATHS.build,
 		filename: 'bundle.js'
 	},
-	
+
 	resolve: {
 		extensions: ['', '.js', '.jsx']
 	},
@@ -36,24 +36,24 @@ const common = {
 			},
 			{
 				test: /\.scss$/,
-			    exclude: PATHS.styles, 
+			    exclude: PATHS.styles,
 			    loader: 'style!css?modules&localIdentName=[name]__[local]!postcss-loader!sass?sourceMap=true'
-			}, 
+			},
 			{
 			    test: /\.scss$/,
-			    include: PATHS.styles, 
+			    include: PATHS.styles,
 			    loader: 'style!css!sass?sourceMap=true'
 			},
-			{ 
-			    test: /\.(png|jpg)$/, 
-			    loader: 'file-loader?name=./img/[name].[ext]' 
+			{
+			    test: /\.(png|jpg)$/,
+			    loader: 'file-loader?name=./img/[name].[ext]'
 			}
 		]
 	},
 	postcss: function() {
 		return [autoprefixer, precss];
 	}
-	
+
 }
 
 if(TARGET === 'start' || !TARGET) {
@@ -68,8 +68,8 @@ if(TARGET === 'start' || !TARGET) {
 
 			stats: 'errors-only',
 
-			host: "localhost",
-			port: 8890
+			host: "192.168.1.214",
+			port: 8081
 		},
 		plugins: [
 			new webpack.HotModuleReplacementPlugin()

@@ -1,0 +1,37 @@
+@import "../../styles/components/variables.scss";
+
+.container {
+	width: 240px;
+	height: 100%;
+	background: $nav-background-color;
+}
+
+.logoWrapper {
+	padding: 1rem;
+	font-size: 2em;
+	border-bottom: 1px solid $deep-gray-color;
+
+	text-align: center;
+	color: white;
+}
+
+.navWrapper {
+	list-style: none;
+	-webkit-padding-start: 0px;
+
+	li {
+		padding: .5rem 1rem;
+		color: white;
+
+		&:hover {
+			background-color: $nav-background-light-color;
+		}
+	}
+}
+
+.icon {
+	display: inline-block;
+	width: 16px;
+	margin-right: 1rem;
+	text-align: center;
+}

@@ -1,0 +1,26 @@
+@import "../../styles/components/variables.scss";
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+
+	width: 100%;
+	background: white;
+	box-shadow: 0 -2px 3px $light-gray-color;
+}
+
+.icon {
+	font-size: 1.3rem;
+}
+
+.navItem {
+	text-align: center;
+	padding: .8rem 1rem;
+
+	font-size: .8em;
+}
+
+.active {
+	color: $primary-color;
+}

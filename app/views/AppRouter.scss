@@ -1,0 +1,79 @@
+@import "../styles/components/variables.scss";
+
+body {
+	background-color: $page-background-color;
+}
+
+
+
+.navWrapper {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+
+.topBarWrapper {
+	position: fixed;
+	width: 100%;
+	top: 0;
+}
+
+.siderBarWrapper {
+	position: relative;
+}
+
+.siderBottomLayer {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+}
+
+
+@keyframes toLeft{
+	0%, 60%, 75%, 90%, 100% {
+	    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	}
+
+	0% {
+    	opacity: 0;
+	}
+
+  	60% {
+    	opacity: 1;
+    	transform: translate3d(20px, 0, 0);
+  	}
+
+  	100% {
+    	transform: translate3d(0, 0, 0);
+  	}
+}
+
+
+.hiddenSiderBar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 200px;
+	z-index: 101;
+
+	transform: translateX(-200px);
+
+	transition: transform .5s ease;
+}
+
+.showSiderBar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 200px;
+	z-index: 101;
+
+	transform: translateX(0);
+
+	transition: transform .5s ease;
+}

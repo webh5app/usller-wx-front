@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 
 
 import reducers from './reducers/reducer';
-import AppContainer from './views/AppContainer.jsx';
+import AppContainer from './views/AppRouter.jsx';
 
 const appReducer = combineReducers(reducers)
 const store = createStore(
