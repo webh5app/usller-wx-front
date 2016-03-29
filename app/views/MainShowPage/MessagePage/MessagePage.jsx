@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from './SearchPageContainer.scss';
+import styles from './MessagePage.scss';
 
-export default class SearchPageContainer extends React.Component {
+export default class MessagePage extends React.Component {
 	constructor(props) {
 		super(props);
 	}

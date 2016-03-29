@@ -1,8 +1,8 @@
 import React from 'react';
 
-import styles from './ArticleDetailContainer.scss';
+import styles from './SearchPage.scss';
 
-export default class ArticleDetailContainer extends React.Component {
+export default class SearchPageContainer extends React.Component {
 	constructor(props) {
 		super(props);
 	}

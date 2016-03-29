@@ -5,33 +5,31 @@ import { connect } from 'react-redux';
 import MainShowPageContainer from "../containers/MainShowPage/MainShowPageContainer.jsx";
 import SearchPageContainer from "../containers/FunctionPage/SearchPageContainer.jsx";
 import ArticleDetailContainer from '../containers/FunctionPage/ArticleDetailContainer.jsx';
+import SideBarContainer from '../containers/FunctionPage/SideBarContainer.jsx';
 
 // 导入 Dumb Component
 import BlockFade from './BlockFade/BlockFade.jsx';
-import SideBar from './SideBar/SideBar.jsx';
 
 // 导入样式
 import styles from './AppRouter.scss';
 
-export default class AppRouter extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+const AppRouter = ({ currentPage }) => (
+	<div style={{height: window.innerHeight, position: 'relative'}} >
+		<MainShowPageContainer />
+	  <BlockFade toggled={currentPage === 'searchPage'}>
+			<SearchPageContainer />
+		</BlockFade>
+		<BlockFade width="160px" toggled={currentPage === 'sideBar'}>
+			<SideBarContainer />
+		</BlockFade>
+		<BlockFade toggled={currentPage == 'articleDetail'}>
+			<ArticleDetailContainer  />
+		</BlockFade>
+	</div>
+);
 
-	render() {
-		return (
-			<div ref="container" style={{height: window.innerHeight, position: 'relative'}} >
-				<MainShowPageContainer />
-			  <BlockFade toggled={this.state.currentPage === 'searchPage'}>
-					<SearchPageContainer />
-				</BlockFade>
-				<BlockFade width="160px" toggled={this.state.currentPage === 'sideBar'}>
-					<SideBar />
-				</BlockFade>
-				<BlockFade toggled={this.state.currentPage == 'articleDetail'}>
-					<ArticleDetailContainer  />
-					</BlockFade>
-			</div>
-		);
-	}
-}
+AppRouter.propTypes = {
+	currentPage: React.PropTypes.string,
+};
+
+export default AppRouter;

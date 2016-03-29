@@ -1,15 +1,15 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import AppRouter from './components/AppRouter.jsx';
+import AppRouter from '../views/AppRouter.jsx';
 
 const mapStateToProps = (state) => {
   return {
-    currentPage: state.router.pageCurrent,
+    currentPage: state.router.get('pageCurrent'),
   }
-}
+};
 
 const AppRouterContainer = connect(
-  mapStateToProps,
-)(AppRouter)
+  mapStateToProps
+)(AppRouter);
 
 export default AppRouterContainer;

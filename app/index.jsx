@@ -6,22 +6,31 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-
-import reducers from './reducers/reducer';
 import AppContainer from './containers/AppRouterContainer.jsx';
 
+import { article, load, router } from './reducers/reducer';
+import { setDataLoad, setDataReceived } from './actions/loadActions';
+import { setArticleList, setActivityList } from './actions/articleActions';
+import data from './datas/articleData';
+
 const appReducer = combineReducers({
-	load: reducers.loadReducer,
-	router: reducers.routerReducer,
-	arcitle: reducers.articleReducer,
+	article,
+	load,
+	router,
 });
 
 const store = createStore(
 	appReducer,
 	applyMiddleware(
 		thunk
-	)
+	),
+	window.devToolsExtension ? window.devToolsExtension() : f => f
 );
+
+store.dispatch(setDataLoad());
+store.dispatch(setArticleList(data.articleList));
+store.dispatch(setActivityList(data.activityList));
+store.dispatch(setDataReceived());
 
 // 使用 thunk, 从服务端 异步读取数据
 

@@ -7,7 +7,7 @@ import ArticleCard from './ArticleCard.jsx';
 import styles from './ArticleSection.scss';
 
 const propTypes = {
-		articleSection: React.PropTypes.array.isRequired,
+		articleSection: React.PropTypes.object.isRequired,
 		onClickSpread: React.PropTypes.func,
 		onClickArticleCard: React.PropTypes.func.isRequired,
 };
