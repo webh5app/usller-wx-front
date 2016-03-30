@@ -6,18 +6,13 @@ import MessagePageContainer from './MessagePage/MessagePageContainer.jsx';
 import UserPageContainer from './UserPage/UserPageContainer.jsx';
 
 // 导入 Dump 组件
-import SwipeLayer from '../../components/SwipeLayer/SwipeLayer.jsx';
+import SwipeLayer from '../SwipeLayer/SwipeLayer.jsx';
 import BottomNavBar from './BottomNavBar.jsx';
 import TopBar from './TopBar.jsx';
 
 // 导入样式
-import styles from './MainShowPageContainer.scss';
+import styles from './MainShowPage.scss';
 
-
-const propTypes = {
-	onClickSide: React.PropTypes.func.isRequired,
-	onClickSearch: React.PropTypes.func.isRequired,
-}
 
 /**
  * 	组件类型为 Container
@@ -25,7 +20,7 @@ const propTypes = {
  *       同时还会触发其父路由, 包括: ArticleDetail, etc.
  *  @func: onRouterCallBack(page_name, page_paras_array)
  */
-export default class MainShowPageContainer extends React.Component {
+export default class MainShowPage extends React.Component {
 	constructor(props) {
 		super(props);
 

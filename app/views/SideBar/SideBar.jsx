@@ -2,10 +2,6 @@ import React from 'react';
 
 import styles from './SideBar.scss';
 
-const propTypes = {
-	onClickSideItem: React.PropTypes.func.isRequired
-};
-
 export default class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -43,5 +39,3 @@ export default class SideBar extends React.Component {
 		);
 	}
 }
-
-SideBar.propTypes = propTypes;

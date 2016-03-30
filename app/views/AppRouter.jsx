@@ -1,55 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 // 导入 Container Compoennt
-import MainShowPageContainer from "./MainShowPage/MainShowPageContainer.jsx";
-import SearchPageContainer from "./SearchPage/SearchPageContainer.jsx";
+import MainShowPageContainer from "../containers/MainShowPage/MainShowPageContainer.jsx";
+import SearchPageContainer from "../containers/FunctionPage/SearchPageContainer.jsx";
+import ArticleDetailContainer from '../containers/FunctionPage/ArticleDetailContainer.jsx';
 
 // 导入 Dumb Component
-import BlockFade from '../components/BlockFade/BlockFade.jsx';
+import BlockFade from './BlockFade/BlockFade.jsx';
 import SideBar from './SideBar/SideBar.jsx';
 
 // 导入样式
 import styles from './AppRouter.scss';
 
-
 export default class AppRouter extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			currentPage: 'mainShowPage',
-		}
-
-		this.clickSide = this.clickSide.bind(this);
-		this.clickSearch = this.clickSearch.bind(this);
-		this.clickSideItem = this.clickSideItem.bind(this);
-	}
-
-	clickSide() {
-		this.setState({currentPage: 'sideBar'});
-	}
-
-	clickSearch() {
-		this.setState({currentPage: 'searchPage'});
-	}
-
-	clickSideItem(pageName) {
-		this.setState({currentPage: pageName});
 	}
 
 	render() {
 		return (
 			<div ref="container" style={{height: window.innerHeight, position: 'relative'}} >
-				<MainShowPageContainer
-					onClickSide={this.clickSide}
-					onClickSearch={this.clickSearch}
-				/>
+				<MainShowPageContainer />
 			  <BlockFade toggled={this.state.currentPage === 'searchPage'}>
 					<SearchPageContainer />
 				</BlockFade>
-				<BlockFade width="240px" toggled={this.state.currentPage === 'sideBar'}>
-					<SideBar onClickSideItem={this.clickSideItem}/>
+				<BlockFade width="160px" toggled={this.state.currentPage === 'sideBar'}>
+					<SideBar />
 				</BlockFade>
+				<BlockFade toggled={this.state.currentPage == 'articleDetail'}>
+					<ArticleDetailContainer  />
+					</BlockFade>
 			</div>
 		);
 	}

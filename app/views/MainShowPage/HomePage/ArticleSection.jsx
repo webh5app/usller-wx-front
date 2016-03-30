@@ -8,12 +8,16 @@ import styles from './ArticleSection.scss';
 
 const propTypes = {
 		articleSection: React.PropTypes.array.isRequired,
+		onClickSpread: React.PropTypes.func,
+		onClickArticleCard: React.PropTypes.func.isRequired,
 };
 
 export default class ArticleSection extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
+
 
 	render() {
 		return (
@@ -23,7 +27,11 @@ export default class ArticleSection extends React.Component {
 				</div>
 				{
 					this.props.articleSection.articles.map((article) =>
-							<ArticleCard article={article} />
+							<ArticleCard
+								article={article}
+								onClickSpread={this.props.onClickSpread}
+								onClickArticleCard={this.props.onClickArticleCard}
+							/>
 					)
 				}
 			</div>
