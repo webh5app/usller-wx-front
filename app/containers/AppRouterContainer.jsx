@@ -5,6 +5,7 @@ import AppRouter from '../views/AppRouter.jsx';
 const mapStateToProps = (state) => {
   return {
     currentPage: state.router.get('pageCurrent'),
+    preload: state.router.get('preload'),
   }
 };
 

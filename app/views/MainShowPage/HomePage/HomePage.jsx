@@ -11,14 +11,8 @@ import styles from './HomePage.scss';
 class HomePage extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.clickSpread = this.clickSpread.bind(this);
 	}
 
-	// TODO: 全局展开, 使用 toPage, 删掉这个函数
-	clickSpread(article) {
-
-	}
 
 	render() {
 		return (
@@ -29,7 +23,7 @@ class HomePage extends React.Component {
 						this.props.articleList.map( (section) =>
 							<ArticleSection
 								articleSection={section}
-								onClickSpread={this.clickSpread}
+								onClickSpread={this.props.clickSpread}
 								onClickArticleCard={this.props.clickArticleCard}
 							/>
 						)
@@ -43,6 +37,7 @@ class HomePage extends React.Component {
 HomePage.propTypes = {
 	activityList: React.PropTypes.array.isRequired,
 	articleList: React.PropTypes.array.isRequired,
+	clickSpread: React.PropTypes.func.isRequired,
 	clickArticleCard: React.PropTypes.func.isRequired,
 };
 

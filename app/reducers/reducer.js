@@ -17,8 +17,9 @@ export function load(state=Map(), action) {
 
 export function router(state=Map(), action) {
 	switch (action.type) {
-		case routerActions.TO_PAGE:
-			return state.set('pageCurrent', action.pageName);
+		case routerActions.TO_PAGE: {
+			return state.set('pageCurrent', action.pageName).set('preload', action.preload)
+		}
 		default:
 			return state;
 	}
@@ -26,10 +27,6 @@ export function router(state=Map(), action) {
 
 export function article(state = Map({currentArticle: null}), action) {
 		switch(action.type) {
-			case articleActions.SET_CURRENT_ARTICLE:
-				return state.set('currentArticle', action.article);
-			case articleActions.CLEAR_CURRENT_ARTICLE:
-				return state;
 			case articleActions.SET_ARTICLE_LIST:
 				return state.set('articleList', action.articleList);
 			case articleActions.SET_ACTIVITY_LIST:

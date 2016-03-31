@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
-import { setCurrentArticle } from '../../actions/articleActions';
-import { toPage } from '../../actions/routerActions';
+import { toPage, pageNames } from '../../actions/routerActions';
 
 import HomePage from '../../views/MainShowPage/HomePage/HomePage';
 
@@ -15,9 +14,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       clickArticleCard: (article) => {
-        // TODO: 去掉这个函数, 改为 toPage
-        dispatch(setCurrentArticle(article));
+        dispatch(toPage(pageNames.ArticleDetail, {article: article}));
       },
+      clickSpread: (article) => {
+        dispatch(toPage(pageNames.MainShowPage));
+      }
     }
 }
 

@@ -13,7 +13,7 @@ import BlockFade from './BlockFade/BlockFade.jsx';
 // 导入样式
 import styles from './AppRouter.scss';
 
-const AppRouter = ({ currentPage }) => (
+const AppRouter = ({ currentPage, preload }) => (
 	<div style={{height: window.innerHeight, position: 'relative'}} >
 		<MainShowPageContainer />
 	  <BlockFade toggled={currentPage === 'searchPage'}>
@@ -23,13 +23,14 @@ const AppRouter = ({ currentPage }) => (
 			<SideBarContainer />
 		</BlockFade>
 		<BlockFade toggled={currentPage == 'articleDetail'}>
-			<ArticleDetailContainer  />
+			<ArticleDetailContainer preload={preload}/>
 		</BlockFade>
 	</div>
 );
 
 AppRouter.propTypes = {
 	currentPage: React.PropTypes.string,
+	preload: React.PropTypes.object,
 };
 
 export default AppRouter;

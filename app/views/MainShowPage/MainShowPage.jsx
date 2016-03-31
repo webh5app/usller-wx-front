@@ -30,9 +30,9 @@ export default class MainShowPage extends React.Component {
 				case '首页':
 					return <HomePageContainer />;
 				case '消息':
-					return <MessagePageContainer />;
+					return <MessagePage />;
 				case '用户':
-					return <UserPageContainer />;
+					return <UserPage />;
 				default:
 					return null;
 		}

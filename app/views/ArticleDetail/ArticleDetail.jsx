@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './ArticleDetail.scss';
 
-export default class ArticleDetailContainer extends React.Component {
+export default class ArticleDetail extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -10,6 +10,7 @@ export default class ArticleDetailContainer extends React.Component {
 	render() {
 		return (
 			<div className={styles.container}>
+				<div onClick={this.props.onCancel}>关闭这个页面</div>
 			</div>
 		);
 	}

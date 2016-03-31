@@ -4,10 +4,8 @@ import { toPage, pageNames } from '../../actions/routerActions';
 
 import ArticleDetail from '../../views/ArticleDetail/ArticleDetail.jsx';
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-      article: ownProps.article
-    };
+const mapStateToProps = (state) => {
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {

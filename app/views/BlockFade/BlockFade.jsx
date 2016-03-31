@@ -29,7 +29,6 @@ export default class BlockFade extends React.Component {
   }
 
   onClickLayer() {
-    console.log('1')
     this.setState({toggle: false});
   }
 
