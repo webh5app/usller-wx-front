@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { toPage, pageNames } from '../../actions/routerActions';
 
-import HomePage from '../../views/MainShowPage/HomePage/HomePage';
+import HomePage from '../../views/mainFramework/HomePage/HomePage.jsx';
 
 const mapStateToProps = (state) => {
   return {

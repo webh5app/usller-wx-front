@@ -68,8 +68,8 @@ if(TARGET === 'start' || !TARGET) {
 
 			stats: 'errors-only',
 
-			host: "192.168.1.214",
-			port: 8081
+			host: 'localhost',
+			port: 8082
 		},
 		plugins: [
 			new webpack.HotModuleReplacementPlugin()

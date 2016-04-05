@@ -1,32 +1,60 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-// 导入 Container Compoennt
-import MainShowPageContainer from "../containers/MainShowPage/MainShowPageContainer.jsx";
-import SearchPageContainer from "../containers/FunctionPage/SearchPageContainer.jsx";
-import ArticleDetailContainer from '../containers/FunctionPage/ArticleDetailContainer.jsx';
-import SideBarContainer from '../containers/FunctionPage/SideBarContainer.jsx';
+// 导入 container compoenets
+import MainShowPageContainer from '../containers/mainFramework/MainShowPageContainer.jsx';
+import ArticleDetailContainer from '../containers/pages/ArticleDetailContainer.jsx';
+import SearchPageContainer from '../containers/pages/SearchPageContainer.jsx';
+import SideBarContainer from '../containers/compositions/SideBarContainer.jsx';
 
-// 导入 Dumb Component
-import BlockFade from './BlockFade/BlockFade.jsx';
+// 导入 dump components
+import PageNotFound from './components/PageNotFound/PageNotFound.jsx';
 
 // 导入样式
 import styles from './AppRouter.scss';
 
-const AppRouter = ({ currentPage, preload }) => (
-	<div style={{height: window.innerHeight, position: 'relative'}} >
-		<MainShowPageContainer />
-	  <BlockFade toggled={currentPage === 'searchPage'}>
-			<SearchPageContainer />
-		</BlockFade>
-		<BlockFade width="160px" toggled={currentPage === 'sideBar'}>
-			<SideBarContainer />
-		</BlockFade>
-		<BlockFade toggled={currentPage == 'articleDetail'}>
-			<ArticleDetailContainer preload={preload}/>
-		</BlockFade>
-	</div>
-);
+import { pageNames } from '../actions/routerActions';
+
+// Composition Page List
+const compositionList = {
+	SideBar: 'SideBar',
+}
+
+class AppRouter extends React.Component {
+	switchPage(pageName) {
+		switch (pageName) {
+			case pageNames.MainShowPage:
+				return <MainShowPageContainer />
+			case pageNames.ArticleDetail:
+				return <ArticleDetailContainer />
+			case pageNames.SearchPage:
+				return <SearchPageContainer />
+			default:
+				return <PageNotFound />
+		}
+	}
+
+	showComposition(activeName) {
+		switch (activeName) {
+			case compositionList.SideBar:
+				return <SideBarContainer />
+			default:
+				return null;
+		}
+	}
+
+	render() {
+		return (
+			<div className={styles.pageWrapper} style={{height: window.innerHeight, position: 'relative'}} >
+				<div className={styles.newPageWrapper}>
+					{ this.switchPage(this.props.currentPage) }
+				</div>
+				<div style={{display: this.props.activeComposition?'block':'none'}} className={styles.compositionWrapper}>
+					{ this.showComposition(this.props.activeComposition) }
+				</div>
+			</div>
+		);
+	}
+}
 
 AppRouter.propTypes = {
 	currentPage: React.PropTypes.string,

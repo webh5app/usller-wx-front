@@ -6,6 +6,7 @@ const mapStateToProps = (state) => {
   return {
     currentPage: state.router.get('pageCurrent'),
     preload: state.router.get('preload'),
+    activeComposition: state.router.get('activeComposition'),
   }
 };
 

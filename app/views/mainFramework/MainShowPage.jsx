@@ -1,19 +1,19 @@
 import React from 'react';
 
-// 导入 Containre 组件
-import HomePageContainer from '../../containers/MainShowPage/HomePageContainer.jsx';
+// 导入 container components
+import HomePageContainer from '../../containers/mainFramework/HomePageContainer.jsx';
 
-// 导入 Dump 组件
+// 导入 dump components
 import MessagePage from './MessagePage/MessagePage.jsx';
 import UserPage from './UserPage/UserPage.jsx';
-import SwipeLayer from '../SwipeLayer/SwipeLayer.jsx';
+import SwipeLayer from '../components/SwipeLayer/SwipeLayer.jsx';
 import BottomNavBar from './BottomNavBar.jsx';
 import TopBar from './TopBar.jsx';
 
 // 导入样式
 import styles from './MainShowPage.scss';
 
-export default class MainShowPage extends React.Component {
+class MainShowPage extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -38,11 +38,13 @@ export default class MainShowPage extends React.Component {
 		}
 	}
 
+	// 底栏触发页面切换
 	clickNavItem(pageName) {
 		this.setState({currentPage: pageName});
 	}
 
 	render() {
+		// 底栏触发页面路由, Side 为叠加页面, Search 为新页面
 		return (
 			<div className={styles.container}>
 				<TopBar
@@ -52,10 +54,10 @@ export default class MainShowPage extends React.Component {
 				<SwipeLayer
 					touchType="left2right"
 					touchArritube={{side:true, threshold:40}}
-					onCompletedAtType={this.props.completedAtType}
+					onCompletedAtType={this.props.clickSide}
 				>
 					<div className={styles.viewWrapper} style={{minHeight: window.innerHeight}}>
-						{this.switchPage(this.state.currentPage)}
+						{ this.switchPage(this.state.currentPage) }
 					</div>
 				</SwipeLayer>
 				<div className={styles.bottomNavBarWrapper}>
@@ -67,3 +69,5 @@ export default class MainShowPage extends React.Component {
 		);
 	}
 }
+
+export default MainShowPage;

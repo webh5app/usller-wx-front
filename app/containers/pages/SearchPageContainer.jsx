@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { toPage, pageNames } from '../../actions/routerActions';
 
-import SearchPage from '../../views/SearchPage/SearchPage.jsx';
+import SearchPage from '../../views/pages/SearchPage/SearchPage.jsx';
 
 const mapStateToProps = (state) => {
   return {};

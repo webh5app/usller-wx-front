@@ -18,7 +18,11 @@ export function load(state=Map(), action) {
 export function router(state=Map(), action) {
 	switch (action.type) {
 		case routerActions.TO_PAGE: {
-			return state.set('pageCurrent', action.pageName).set('preload', action.preload)
+			const { pageName, preload, composition=null} = action;
+			return state
+							.set('pageCurrent', pageName)
+							.set('preload', preload)
+							.set('activeComposition', composition)
 		}
 		default:
 			return state;

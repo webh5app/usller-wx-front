@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { toPage, pageNames }from '../../actions/routerActions';
-import MainShowPage from '../../views/MainShowPage/MainShowPage.jsx';
+import MainShowPage from '../../views/mainFramework/MainShowPage.jsx';
 
 const mapStateToProps = (state) => {
     return {
@@ -10,11 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      completedAtType: () => {
-        dispatch(toPage(pageNames.SideBar));
-      },
       clickSide: () => {
-        dispatch(toPage(pageNames.SideBar));
+        dispatch(toPage(pageNames.MainShowPage, {}, 'SideBar'));
       },
       clickSearch: () => {
         dispatch(toPage(pageNames.SearchPage))
