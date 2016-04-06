@@ -18,13 +18,18 @@ export function load(state=Map(), action) {
 export function router(state=Map(), action) {
 	switch (action.type) {
 		case routerActions.TO_PAGE: {
-			const { pageName, preload, composition=null} = action;
+			const { pageName, preload } = action;
 			window.scrollTo(0,0);
 			return state
-							.set('pageCurrent', pageName)
-							.set('preload', preload)
-							.set('activeComposition', composition)
+							.set('pageName', pageName)
+							.set('pagePreload', preload);
 		}
+    case routerActions.TO_COMPOSITION: {
+      const { compositionName=null, preload={} } = action;
+      return state
+              .set('compositionName', compositionName)
+              .set('compositionPreload', preload);
+    }
 		default:
 			return state;
 	}

@@ -4,9 +4,10 @@ import AppRouter from '../views/AppRouter.jsx';
 
 const mapStateToProps = (state) => {
   return {
-    currentPage: state.router.get('pageCurrent'),
-    preload: state.router.get('preload'),
-    activeComposition: state.router.get('activeComposition'),
+    pageName: state.router.get('pageName'),
+    pagePreload: state.router.get('pagePreload'),
+    compositionName: state.router.get('compositionName'),
+    compositionPreload: state.router.get('compositionPreload'),
   }
 };
 

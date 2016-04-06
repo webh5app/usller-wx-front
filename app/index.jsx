@@ -1,10 +1,10 @@
-import "./styles/normalize.scss";
-
 import React from 'react';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+
+import "./styles/normalize.scss";
 
 import AppContainer from './containers/AppRouterContainer.jsx';
 

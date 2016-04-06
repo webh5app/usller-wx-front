@@ -1,11 +1,19 @@
-export const TO_PAGE = 'TO_PAGE'
+export const TO_PAGE = 'TO_PAGE';
+export const TO_COMPOSITION = 'TO_COMPOSITION';
 
-export function toPage(pageName, preload={}, composition=null) {
+export function toPage(pageName, preload={}) {
   return {
       type: TO_PAGE,
       pageName: pageName,
       preload: preload,
-      composition: composition,
+  }
+}
+
+export function toComposition(compositionName, preload={}) {
+  return {
+    type: TO_COMPOSITION,
+    compositionName: compositionName,
+    preload: preload,
   }
 }
 

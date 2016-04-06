@@ -3,8 +3,10 @@ import React from 'react';
 // 导入 container compoenets
 import MainShowPageContainer from '../containers/mainFramework/MainShowPageContainer.jsx';
 import ArticleDetailContainer from '../containers/pages/ArticleDetailContainer.jsx';
+import ArticleCommentContainer from '../containers/pages/ArticleCommentContainer.jsx';
 import SearchPageContainer from '../containers/pages/SearchPageContainer.jsx';
 import SideBarContainer from '../containers/compositions/SideBarContainer.jsx';
+import ShareBoxContainer from '../containers/compositions/ShareBoxContainer.jsx';
 
 // 导入 dump components
 import PageNotFound from './components/PageNotFound/PageNotFound.jsx';
@@ -20,10 +22,15 @@ class AppRouter extends React.Component {
 			case pageNames.MainShowPage:
 				return <MainShowPageContainer />
 			case pageNames.ArticleDetail:
+        // NOTE this.props.pageProload 在这里使用
 				return <ArticleDetailContainer />
 			case pageNames.SearchPage:
+        // NOTE this.props.pageProload 在这里使用
 				return <SearchPageContainer />
+      case pageNames.ArticleComment:
+        return <ArticleCommentContainer />
 			default:
+        // NOTE this.props.pageProload 在这里使用
 				return <PageNotFound />
 		}
 	}
@@ -31,7 +38,11 @@ class AppRouter extends React.Component {
 	showComposition(activeName) {
 		switch (activeName) {
 			case compositionNames.SideBar:
+        // NOTE this.props.compositionProload 在这里使用
 				return <SideBarContainer />
+      case compositionNames.ShareBox:
+        // NOTE this.props.compositionProload 在这里使用
+        return <ShareBoxContainer />
 			default:
 				return null;
 		}
@@ -41,10 +52,10 @@ class AppRouter extends React.Component {
 		return (
 			<div className={styles.pageWrapper}>
 				<div className={styles.newPageWrapper}>
-					{ this.switchPage(this.props.currentPage) }
+					{ this.switchPage(this.props.pageName) }
 				</div>
-				<div style={{display: this.props.activeComposition?'block':'none'}} className={styles.compositionWrapper}>
-					{ this.showComposition(this.props.activeComposition) }
+				<div style={{display: this.props.compositionName?'block':'none'}} className={styles.compositionWrapper}>
+					{ this.showComposition(this.props.compositionName) }
 				</div>
 			</div>
 		);

@@ -7,15 +7,20 @@ class ShareBox extends React.Component {
     super(props);
   }
 
+  componentDidMound() {
+    this.refs.box.focus();
+  }
+
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.maskWrapper}></div>
+        <div className={styles.maskWrapper} onClick={this.props.onCancel}></div>
         <div className={styles.boxWrapper}>
-          <div className={styles.boxContainer}>
-          </div>
+          <div ref="box" className={styles.boxContainer} onBlur={this.props.onCancel}/>
         </div>
       </div>
     );
   }
 }
+
+export default ShareBox;

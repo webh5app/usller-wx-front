@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { toPage, pageNames } from '../../actions/routerActions';
+import { toPage, toComposition, pageNames, compositionNames } from '../../actions/routerActions';
 
 import ArticleDetail from '../../views/pages/ArticleDetail/ArticleDetail.jsx';
 
@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(toPage(pageNames.MainShowPage))
       },
       onShare: () => {
-        // TODO preload 放入分享的链接和标题, composition 为 shareComposition
-        dispatch(toPage(pageNames.MainShowPage, {}, null));
+        // NOTE 写入负载
+        dispatch(toComposition(compositionNames.ShareBox));
       },
       onComment: () => {
         dispatch(toPage(pageNames.ArticleComment));
