@@ -19,6 +19,7 @@ export function router(state=Map(), action) {
 	switch (action.type) {
 		case routerActions.TO_PAGE: {
 			const { pageName, preload, composition=null} = action;
+			window.scrollTo(0,0);
 			return state
 							.set('pageCurrent', pageName)
 							.set('preload', preload)

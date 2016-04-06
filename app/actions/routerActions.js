@@ -14,5 +14,11 @@ export const pageNames = {
   SideBar: 'sideBar',
   SearchPage: 'searchPage',
   ArticleDetail: 'articleDetail',
-  ArticleSpread: 'articleSpread',
+  ArticleComment: 'ArticleComment',
+}
+
+export const compositionNames = {
+  SideBar: 'sideBar',
+  ShareBox: 'shareBox',
+  LoginSelectBox: 'loginSelectBox',
 }

@@ -7,6 +7,7 @@ import HomePageContainer from '../../containers/mainFramework/HomePageContainer.
 import MessagePage from './MessagePage/MessagePage.jsx';
 import UserPage from './UserPage/UserPage.jsx';
 import SwipeLayer from '../components/SwipeLayer/SwipeLayer.jsx';
+import ScrollUp from '../components/ScrollUp/ScrollUp.jsx';
 import BottomNavBar from './BottomNavBar.jsx';
 import TopBar from './TopBar.jsx';
 
@@ -44,13 +45,14 @@ class MainShowPage extends React.Component {
 	}
 
 	render() {
-		// 底栏触发页面路由, Side 为叠加页面, Search 为新页面
 		return (
-			<div className={styles.container}>
-				<TopBar
-					onClickSide={this.props.clickSide}
-					onClickSearch={this.props.clickSearch}
-				/>
+			<div ref="container" className={styles.container} onScroll={this.scrollDown}>
+				<div className={styles.topBarWrapper}>
+					<TopBar
+						onClickSide={this.props.clickSide}
+						onClickSearch={this.props.clickSearch}
+					/>
+				</div>
 				<SwipeLayer
 					touchType="left2right"
 					touchArritube={{side:true, threshold:40}}
@@ -65,6 +67,9 @@ class MainShowPage extends React.Component {
 						onClickNavItem={this.clickNavItem}
 					/>
 				</div>
+				<ScrollUp showUnder={160}>
+					<span className={"fa fa-arrow-up"}></span>
+				</ScrollUp>
 			</div>
 		);
 	}

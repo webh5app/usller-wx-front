@@ -68,7 +68,7 @@ if(TARGET === 'start' || !TARGET) {
 
 			stats: 'errors-only',
 
-			host: 'localhost',
+			host: '0.0.0.0',
 			port: 8082
 		},
 		plugins: [

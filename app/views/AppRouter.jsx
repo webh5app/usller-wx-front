@@ -12,12 +12,7 @@ import PageNotFound from './components/PageNotFound/PageNotFound.jsx';
 // 导入样式
 import styles from './AppRouter.scss';
 
-import { pageNames } from '../actions/routerActions';
-
-// Composition Page List
-const compositionList = {
-	SideBar: 'SideBar',
-}
+import { pageNames, compositionNames } from '../actions/routerActions';
 
 class AppRouter extends React.Component {
 	switchPage(pageName) {
@@ -35,7 +30,7 @@ class AppRouter extends React.Component {
 
 	showComposition(activeName) {
 		switch (activeName) {
-			case compositionList.SideBar:
+			case compositionNames.SideBar:
 				return <SideBarContainer />
 			default:
 				return null;
@@ -44,7 +39,7 @@ class AppRouter extends React.Component {
 
 	render() {
 		return (
-			<div className={styles.pageWrapper} style={{height: window.innerHeight, position: 'relative'}} >
+			<div className={styles.pageWrapper}>
 				<div className={styles.newPageWrapper}>
 					{ this.switchPage(this.props.currentPage) }
 				</div>

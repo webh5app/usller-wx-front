@@ -10,8 +10,8 @@ import datas from '../../datas/articleData';
 const mapStateToProps = (state, ownProps) => {
   const articleCard = ownProps.article;
 
-  // 通过 articleCard 来找到 article 文章
-  // 如果没有 articleCard 就加载空页面
+  // NOTE 通过 articleCard 来找到 article 文章
+  // NOTE 如果没有 articleCard 就加载空页面
   return {
     article: datas.pureTextArticle,
   };
@@ -22,10 +22,13 @@ const mapDispatchToProps = (dispatch) => {
       onCancel: () => {
         dispatch(toPage(pageNames.MainShowPage))
       },
-      // TODO: 弹出分享页面(临时页面)
       onShare: () => {
-        dispatch(toPage(pageNames.MainShowPage))
+        // TODO preload 放入分享的链接和标题, composition 为 shareComposition
+        dispatch(toPage(pageNames.MainShowPage, {}, null));
       },
+      onComment: () => {
+        dispatch(toPage(pageNames.ArticleComment));
+      }
     }
 }
 

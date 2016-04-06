@@ -15,7 +15,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(toPage(pageName));
     },
     onMask: () => {
-      console.log('toggle.onMask');
       dispatch(toPage(pageNames.MainShowPage));
     }
   };
