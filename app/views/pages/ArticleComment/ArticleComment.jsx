@@ -5,6 +5,39 @@ import styles from './ArticleComment.scss';
 class ArticleComment extends React.Component {
   constructor(props) {
     super(props);
+
+    this.placeholder = '请在这里输入评论';
+  }
+
+  componentDidMount() {
+    this.refs.input.value = this.placeholder;
+    this.refs.input.addEventListener('focus', this.focusInput.bind(this));
+    this.refs.input.addEventListener('blur', this.blurInput.bind(this));
+  }
+
+  componentWillUnMount() {
+    this.refs.input.removeEventListener('focus', this.focusInput.bind(this));
+    this.refs.input.removeEventListener('blur', this.blurInput.bind(this));
+  }
+
+  focusInput() {
+    const input = this.refs.input;
+    if (input.value === this.placeholder) {
+      input.value = '';
+    }
+    input.rows = 5;
+  }
+
+  blurInput() {
+    const input = this.refs.input;
+    if (input.value === '') {
+      input.value = this.placeholder;
+    }
+    input.rows = 1;
+  }
+
+  sendMessage() {
+    this.props.onSendMessage(this.refs.input.value);
   }
 
   renderCommentList(data) {
@@ -44,8 +77,10 @@ class ArticleComment extends React.Component {
           { this.renderCommentList(this.props.commentList) }
         </div>
         <div className={styles.sendMessage}>
-          <input width={window.innerWidth * 0.9 + 'px'}  type="text" placeholder="在这里写评论"/>
-          <span className={"fa fa-paper-plane " + styles.icon}/>
+          <textarea rows="1" ref="input" onFocus={this.inputFoucs}></textarea>
+          <span className={"fa fa-paper-plane " + styles.icon}
+            onClick={this.sendMessage.bind(this)}
+          />
         </div>
       </div>
     );

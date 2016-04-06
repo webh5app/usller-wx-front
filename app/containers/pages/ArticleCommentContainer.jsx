@@ -15,7 +15,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onCancel: () => {
-      dispatch(toPage(pageNames.MainShowPage));
+      dispatch(toPage(pageNames.ArticleDetail));
+    },
+    onSendMessage: (comment) => {
+      // TODO 提交到后台
+      console.log(comment);
     }
   };
 }
