@@ -5,22 +5,33 @@
 	flex-direction: row;
 	justify-content: space-around;
 
+  font-size: 1em;
 	width: 100%;
 	background: white;
-	box-shadow: 0 -2px 3px $light-gray-color;
-}
-
-.icon {
-	font-size: 1.3rem;
+	box-shadow: 0 -2px 5px rgba(0,0,0,0.12);
 }
 
 .navItem {
+  position: relative;
 	text-align: center;
-	padding: .8rem 1rem;
+	padding: .6rem 1rem;
 
-	font-size: .8em;
-}
+  .icon {
+    font-size: 14px;
+    margin-right: 4px;
+  }
 
-.active {
-	color: $primary-color;
+  .text {
+    font-size: 14px;
+    vertical-align: middle;
+    color: #666;
+  }
+
+  &.active {
+    color: #ff5595;
+
+    .text {
+      color: #ff5595;
+    }
+  }
 }

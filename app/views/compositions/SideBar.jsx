@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './SideBar.scss';
 
-export default class SideBar extends React.Component {
+class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -42,3 +42,10 @@ export default class SideBar extends React.Component {
 		);
 	}
 }
+
+SideBar.propTypes = {
+  onClickSideItem: React.PropTypes.func.isRequired,
+  onMask: React.PropTypes.func.isRequired,
+}
+
+export default SideBar;

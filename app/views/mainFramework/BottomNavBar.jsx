@@ -49,8 +49,8 @@ export default class BottomNavBar extends React.Component {
 				className={`${styles.navItem} ${currentPage === item.name ? styles.active : 'null'}`}
 				onClick={this.clickItem.bind(null, item.name)}
 			>
-				<span className={`fa ${item.icon} ${styles.icon}`}></span><br/>
-				{item.name}
+				<span className={`fa ${item.icon} ${styles.icon}`}></span>
+				<span className={styles.text}> {item.name} </span>
 			</div>
 		);
 	}

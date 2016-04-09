@@ -1,4 +1,5 @@
 import React from 'react';
+import objectAssign from 'object-assign';
 
 import styles from './ArticleComment.scss';
 
@@ -6,11 +7,14 @@ class ArticleComment extends React.Component {
   constructor(props) {
     super(props);
 
-    this.placeholder = '请在这里输入评论';
+    this.state = {
+      commentList: this.props.commentList,
+    }
+
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   componentDidMount() {
-    this.refs.input.value = this.placeholder;
     this.refs.input.addEventListener('focus', this.focusInput.bind(this));
     this.refs.input.addEventListener('blur', this.blurInput.bind(this));
   }
@@ -22,22 +26,35 @@ class ArticleComment extends React.Component {
 
   focusInput() {
     const input = this.refs.input;
-    if (input.value === this.placeholder) {
-      input.value = '';
-    }
     input.rows = 5;
   }
 
   blurInput() {
     const input = this.refs.input;
-    if (input.value === '') {
-      input.value = this.placeholder;
-    }
     input.rows = 1;
   }
 
   sendMessage() {
-    this.props.onSendMessage(this.refs.input.value);
+    const _commentList = objectAssign([], this.state.commentList);
+    const input = this.refs.input;
+    const datetime = new Date();
+
+    if (!input.value) return;
+
+    // TODO 部分用户数据需要重新获取
+    const comment = {
+      author: {
+        name: '新用户',
+        imageURL: 'http://p2.wmpic.me/article/2015/03/16/1426483393_yCesCgkT.jpeg',
+      },
+      content: input.value,
+      datetime: `${datetime.getYear()%100}年${datetime.getMonth()+1}月${datetime.getDate()}日`,
+    }
+
+    _commentList.push(comment);
+    this.setState({commentList: _commentList});
+    this.props.onSendMessage(input.value);
+    input.value = '';
   }
 
   renderCommentList(data) {
@@ -62,6 +79,7 @@ class ArticleComment extends React.Component {
   }
 
   render() {
+    // TODO 排序功能
     return (
       <div className={styles.container}>
         <div className={styles.topBar}>
@@ -74,12 +92,12 @@ class ArticleComment extends React.Component {
           </div>
         </div>
         <div className={styles.commentList}>
-          { this.renderCommentList(this.props.commentList) }
+          { this.renderCommentList(this.state.commentList) }
         </div>
         <div className={styles.sendMessage}>
-          <textarea rows="1" ref="input" onFocus={this.inputFoucs}></textarea>
+          <textarea placeholder="请在这里输入评论" rows="1" ref="input" onFocus={this.inputFoucs}></textarea>
           <span className={"fa fa-paper-plane " + styles.icon}
-            onClick={this.sendMessage.bind(this)}
+            onClick={this.sendMessage}
           />
         </div>
       </div>

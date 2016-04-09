@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { toPage, pageNames }from '../../actions/routerActions';
+import { toPage, toComposition, pageNames }from '../../actions/routerActions';
 
 import SideBar from '../../views/compositions/SideBar.jsx';
 
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(toPage(pageName));
     },
     onMask: () => {
-      dispatch(toPage(pageNames.MainShowPage));
+      dispatch(toComposition(null));
     }
   };
 }

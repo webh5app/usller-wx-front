@@ -2,6 +2,7 @@ import React from 'react';
 
 // 导入 container components
 import HomePageContainer from '../../containers/mainFramework/HomePageContainer.jsx';
+import CollectionPageContainer from '../../containers/mainFramework/CollectionPageContainer.jsx';
 
 // 导入 dump components
 import MessagePage from './MessagePage/MessagePage.jsx';
@@ -30,6 +31,8 @@ class MainShowPage extends React.Component {
 		switch (pageName) {
 				case '首页':
 					return <HomePageContainer />;
+        case '广场':
+          return <CollectionPageContainer />;
 				case '消息':
 					return <MessagePage />;
 				case '用户':
@@ -46,7 +49,7 @@ class MainShowPage extends React.Component {
 
 	render() {
 		return (
-			<div ref="container" className={styles.container} onScroll={this.scrollDown}>
+			<div ref="container" className={styles.container}>
 				<div className={styles.topBarWrapper}>
 					<TopBar
 						onClickSide={this.props.clickSide}
