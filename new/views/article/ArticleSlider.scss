@@ -1,0 +1,47 @@
+.slider{
+  position: relative;
+  background-color: white;
+  padding-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+
+.slideWrapper {
+}
+
+.slide {
+  height: 200px;
+  float: left;
+  padding: 0 1rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+}
+
+.flagWrapper {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+
+  text-align: center;
+}
+
+.flag {
+  width: .5rem;
+  height: .5rem;
+  margin: 0 .5rem;
+  display: inline-block;
+  border-radius: 500px;
+  background-color: #ccc;
+  transition: width .5s ease-in-out;
+}
+
+.flagActive {
+  width: 1.5rem;
+  background-color: #aaa;
+  transition: width .5s ease-in-out;
+}

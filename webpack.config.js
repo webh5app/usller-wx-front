@@ -7,7 +7,7 @@ var precss       = require('precss');
 
 
 const PATHS = {
-	'app': path.join(__dirname, 'app'),
+	'app': path.join(__dirname, 'new'),
 	'build': path.join(__dirname, 'build'),
 	'styles': path.join(__dirname, 'app/styles')
 }
@@ -45,11 +45,16 @@ const common = {
 			    loader: 'style!css!sass?sourceMap=true'
 			},
 			{
-			    test: /\.(png|jpg)$/,
+			    test: /\.(png|jpg|jpeg)$/,
 			    loader: 'file-loader?name=./img/[name].[ext]'
 			}
-		]
+		],
+    noParse: ['react', 'react-dom'],
 	},
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+  },
 	postcss: function() {
 		return [autoprefixer, precss];
 	}
@@ -72,7 +77,8 @@ if(TARGET === 'start' || !TARGET) {
 			port: 8082
 		},
 		plugins: [
-			new webpack.HotModuleReplacementPlugin()
+			new webpack.HotModuleReplacementPlugin(),
+
 		]
 	});
 }

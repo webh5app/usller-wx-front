@@ -1,0 +1,293 @@
+.articleDetail {
+  width: 100%;
+  background: rgba(0,0,0,0.08);
+}
+
+// Header
+.articleHeader {
+  width: 100%;
+  background: white;
+}
+
+.headerTop {
+  img {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+  }
+}
+
+.headerFloatWrapper {
+  position: fixed;
+  top: .5rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 100;
+
+  span {
+    display: inline-block;
+    line-height: 1;
+    font-size: 16px;
+    padding: 13px 13px 11px 11px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    border-radius: 500px;
+    color: white;
+    background-color: rgba(0,0,0,0.72);
+  }
+
+  .like {
+    margin-right: 1rem;
+    background-color: rgba(255,78,78,0.78);
+  }
+
+  .share {
+    background-color: rgba(30,144,255,0.78);
+  }
+}
+
+.headerRightWrapper {
+  float: right;
+}
+
+.headerTitle {
+  position: relative;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  &::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #37ccff;
+  }
+}
+
+.headerBottom {
+  margin-top: 1.3rem;
+  padding: 0 1rem;
+
+  .activity {
+    padding: 2px 4px;
+    color: #37ccff;
+    font-size: 12px;
+    border-radius: 2px;
+    border: 1px solid #37ccff;
+    margin-right: .8rem;
+  }
+
+  .datetime {
+    color: #666;
+    font-size: 12px;
+    margin-right: .5rem;
+  }
+}
+
+.headerOpt {
+  margin-top: 1.7rem;
+  padding: 0 1rem;
+  padding-bottom: .5rem;
+
+  .number {
+    color: #aaa;
+    font-size: 12px;
+    margin-right: 1rem;
+  }
+
+  .icon {
+    font-size: 13px;
+    color: #aaa;
+    margin-right: .3rem;
+  }
+}
+
+
+// Content
+.articleContent {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  width: 100%;
+  background-color: white;
+}
+
+.contentHeader {
+  padding: .8rem;
+  padding-bottom: .5rem;
+  position: relative;
+  border-bottom: 1px dashed rgba(0,0,0,0.24);
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: .8rem;
+    bottom: .5rem;
+    left: 0;
+    width: 3px;
+    background-color: #37ccff;
+  }
+
+}
+
+.contentWrapper {
+  padding: .8rem 0 2rem 0;
+  color: #333;
+  line-height: 1.8;
+  letter-spacing: .7px;
+}
+
+
+// Comments
+.articleComment {
+  margin-top: 2rem;
+  padding: 0 1rem 2rem 1rem;
+  background-color: white;
+}
+
+.commentHeader {
+  position: relative;
+  padding: .8rem 0 .5rem .8rem;
+  border-bottom: 1px dashed rgba(0,0,0,0.24);
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: .8rem;
+    bottom: .5rem;
+    left: 0;
+    width: 3px;
+    background-color: #37ccff;
+  }
+}
+
+.commentWrapper {
+  margin-top: 1rem;
+}
+
+.commentItem {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+
+  .leftFloat {
+    float: left;
+
+    img {
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+    }
+  }
+
+  .rightFloat {
+    margin-left: 40px;
+    padding-left: 1rem;
+    line-height: 1;
+  }
+
+  .rightHeader {
+    color: #333;
+    font-weight: bold;
+  }
+
+  .rightComment {
+    margin-top: .8rem;
+    color: #333;
+  }
+
+  .rightBottom {
+    margin-top: 1rem;
+    font-size: 12px;
+    color: #666;
+
+    .icon {
+      margin-right: 4px;
+    }
+  }
+
+  .right {
+    float: right;
+    margin-right: .5rem;
+  }
+}
+
+// Edit Comments
+.editWrapper {
+  float: right;
+  font-size: 13px;
+  color: #333;
+
+  .icon {
+    margin-right: 4px;
+    font-size: 13px;
+  }
+}
+
+.articleEdit {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  background-color: #e2e2e2;
+}
+
+.editHeader {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08);
+
+  .left {
+    display: inline-block;
+
+    .icon {
+      margin-right: 6px;
+    }
+  }
+
+  .right{
+    float: right;
+
+    .icon {
+      margin-left: 1.4rem;
+    }
+  }
+
+  .send {
+    display: inline-block;
+  }
+
+  .text {
+    display: inline-block;
+    margin-left: 6px;
+  }
+}
+
+.editContent {
+  margin-top: 1rem;
+  width: 100%;
+
+  textarea {
+    width: 100%;
+    background-color: #e2e2e2;
+    padding: 0 1rem;
+    line-height: 1.5;
+    border: 0;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.editFooter {
+  padding:1rem;
+}

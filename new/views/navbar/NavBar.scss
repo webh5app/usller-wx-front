@@ -1,0 +1,47 @@
+// 外层容器
+.topNavBarContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  background-color: #009688;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.24);
+}
+
+// 标签容器
+.itemWrapper {
+  color: #fdfdfd;
+  display: inline-block;
+  padding: 1rem;
+  padding-bottom: .8rem;
+}
+
+// 标签激活状态
+.itemActive {
+  position: relative;
+  &:before {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: .3rem;
+    right: .3rem;
+    height: 3px;
+    background-color: #ffd54f;
+  }
+}
+
+// 图标类型的标签
+.iconWrapper {
+}
+
+// 文字类型的标签
+.fontWrapper {
+
+}
+
+// 靠右对齐的标签
+.rightWrapper {
+  float: right;
+}

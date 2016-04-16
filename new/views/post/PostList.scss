@@ -1,0 +1,169 @@
+.postListContainer {
+  margin-top: 43px;
+  background-color: rgba(0,0,0,0.08);
+  // NOTE 测试
+  padding-bottom: 1rem;
+}
+
+.listHeader{
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background-image: url("../../images/banner.jpg");
+  background-size: cover;
+}
+
+.navWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 1;
+
+  font-size: 12px;
+  color: #ddd;
+  text-align: center;
+}
+
+// 下拉框
+.selectLabel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: inline-block;
+  padding: .4rem .7rem;
+  background-color: rgba(255,78,78,0.78);
+  color: white;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.24);
+  z-index: 1;
+  border-radius: 2px;
+
+  .icon {
+    margin-right: 8px;
+  }
+
+  .down {
+    margin-left: 12px;
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-top: 7px solid white;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+}
+
+.optionWrapper {
+  padding: .5rem 1.5rem;
+
+  font-size: 12px;
+  color: #666;
+  background-color: white;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.24);
+  border-radius: 2px;
+}
+
+.optionItem {
+  padding: 1.3rem;
+  display: inline-block;
+
+  .icon {
+    color: #333;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+}
+
+.labelMask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  padding-top: 4rem;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.6);
+}
+
+// edit
+// Edit Comments
+.editWrapper {
+  float: right;
+  font-size: 13px;
+  color: #333;
+
+  .icon {
+    margin-right: 4px;
+    font-size: 13px;
+  }
+}
+
+.articleEdit {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  background-color: #e2e2e2;
+}
+
+.editHeader {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08);
+
+  .left {
+    display: inline-block;
+
+    .icon {
+      margin-right: 6px;
+    }
+  }
+
+  .right{
+    float: right;
+
+    .icon {
+      margin-left: 1.4rem;
+    }
+  }
+
+  .send {
+    display: inline-block;
+  }
+
+  .text {
+    display: inline-block;
+    margin-left: 6px;
+  }
+}
+
+.editContent {
+  margin-top: 1rem;
+  width: 100%;
+
+  textarea {
+    width: 100%;
+    background-color: #e2e2e2;
+    padding: 0 1rem;
+    line-height: 1.5;
+    border: 0;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.editFooter {
+  padding:1rem;
+}
