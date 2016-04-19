@@ -73,6 +73,7 @@ class ArticleSlider extends React.Component {
 
   // 实时滑动, 记录滑动数据, 更新信息
   swipeSliderMove(evt) {
+    console.log(1)
     evt.preventDefault();
 
     const touch = evt.touches[0];
@@ -110,7 +111,7 @@ class ArticleSlider extends React.Component {
 
     slide.style.transition = '.3s ease-in-out transform';
     slide.style.transform = `translate3D(-${(current-1) * this.innerWidth}px, 0, 0)`;
-    
+
     // 支持 android 版的微信
     slide.style.webkitTransition = '.3s ease-in-out -webkit-transform';
     slide.style.webkitTransform = `translate3D(-${(current-1) * this.innerWidth}px, 0, 0)`;

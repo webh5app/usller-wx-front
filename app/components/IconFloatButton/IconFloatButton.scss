@@ -1,0 +1,15 @@
+.floatButtonWrapper {
+  position: fixed;
+  border-radius: 100px;
+  padding: 13px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.24);
+  cursor: pointer;
+
+  span {
+    display: inline-block;
+    line-height: 1;
+    width: 14px;
+    height: 14px;
+  }
+}

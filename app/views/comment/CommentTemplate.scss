@@ -1,0 +1,20 @@
+.postCommentList {
+  margin-top: 2rem;
+  background-color: white;
+}
+
+.commentHeader {
+  position: relative;
+  padding: 1rem;
+  font-weight: bold;
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: .8rem;
+    bottom: .8rem;
+    left: 0;
+    width: 3px;
+    background-color: #FB7070;
+  }
+}

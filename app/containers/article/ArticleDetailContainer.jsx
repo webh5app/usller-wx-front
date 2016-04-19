@@ -6,8 +6,13 @@ const mapStateToProps = (state, ownProps) => {
   return {};
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return { }
+}
+
 const ArticleDetailContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ArticleDetail)
 
 export default ArticleDetailContainer;

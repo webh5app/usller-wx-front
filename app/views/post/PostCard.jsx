@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import styles from './PostSection.scss';
+import styles from './PostCard.scss';
 
 const cardData = {
   author: {
@@ -23,14 +23,14 @@ const cardData = {
   }
 }
 
-class PostSection extends React.Component {
+class PostCard extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <div className={styles.postSectionContainer}>
+      <div className={styles.postSectionContainer} onClick={this.props.click}>
         <div className={styles.cardWrapper}>
           <div className={styles.cardHeader}>
             <div className={styles.right}>
@@ -82,7 +82,7 @@ class PostSection extends React.Component {
   }
 }
 
-PostSection.PropTypes = {
+PostCard.PropTypes = {
   cardData: React.PropTypes.shape({
     author: React.PropTypes.shape({
       name: React.PropTypes.string.isRequired,
@@ -100,11 +100,12 @@ PostSection.PropTypes = {
       cataIcon: React.PropTypes.string.isRequired,
       cataText: React.PropTypes.string.isRequired,
     })
-  })
+  }),
+  click: React.PropTypes.func.isRequired,
 }
 
-PostSection.defaultProps = {
+PostCard.defaultProps = {
   cardData: cardData
 }
 
-export default PostSection;
+export default PostCard;

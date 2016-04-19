@@ -1,0 +1,96 @@
+.postDetailContainer {
+  position: relative;
+  color: #333;
+  padding-bottom: 4rem;
+  background-color: #ddd;
+}
+
+.postHeader {
+  position: relative;
+  padding: 1rem;
+  background-color: white;
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: 1rem;
+    left: 0;
+    height: 40px;
+    width: 3px;
+    background: #FB7070;
+  }
+
+  .info {
+    &:after {
+      display: block;
+      content: '.';
+      height: 0;
+      visibility: hidden;
+      clear: both;
+    }
+
+    img {
+      float: left;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background-size: cover;
+    }
+
+    .cata {
+      float: right;
+      color: #FB7070;
+
+      .icon {
+        margin-right: .5rem;
+      }
+    }
+
+    .author {
+      display: inline-block;
+      margin-left: 1rem;
+      color: #666;
+
+      .name {
+        font-weight: bold;
+      }
+
+      .datetime {
+        margin-top: .8rem;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .title {
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+
+  .body {
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 1rem;
+    color: #666;
+    letter-spacing: .5px;
+  }
+
+  .meta {
+    margin-top: 1rem;
+  }
+
+  .metaItem {
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 1rem;
+    color: #666;
+
+    .icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+// 浮动按钮
+.floatButtonContainer {
+}

@@ -7,7 +7,7 @@ var precss       = require('precss');
 
 
 const PATHS = {
-	'app': path.join(__dirname, 'new'),
+	'app': path.join(__dirname, 'app'),
 	'build': path.join(__dirname, 'build'),
 	'styles': path.join(__dirname, 'app/styles')
 }

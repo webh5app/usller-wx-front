@@ -1,4 +1,5 @@
 const url = require('../../images/2.jpeg');
+const authorURL = "http://img.wxcha.com/file/201603/28/2722e3ab4c.jpg";
 
 const article = {
   header: {
@@ -18,33 +19,39 @@ const article = {
     {
       author: {
         name: '王尼玛',
-        image: url,
+        imageURL: authorURL,
       },
       comment: '优惠给力啊, 再给力点吧',
       datetime: '16年4月5日',
-      like: 100,
+      meta: {
+        like: 100,
+      },
       response:  '大头死变态',
     },
     {
       author: {
         name: '王尼妹',
-        image: url,
+        imageURL: authorURL,
       },
       comment: '楼上的是我哥',
       datetime: '16年4月5日',
       response:  '大头死变态',
-      like: 100,
-      response: '真的是你哥耶!',
+      meta: {
+        like: 100,
+      },
+      response: '耶!',
     },
     {
       author: {
         name: '哈啊哈哈哈',
-        image: url,
+        imageURL: authorURL,
       },
       comment: '啦啦啦啦啦啦啦啦啦',
       datetime: '16年4月5日',
       response:  '大头死变态',
-      like: 100,
+      meta: {
+        like: 100,
+      },
       response: null,
     }
   ],

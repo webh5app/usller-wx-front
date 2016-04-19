@@ -1,0 +1,69 @@
+.editContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  background-color: #f4f4f4;
+}
+
+.editHeader {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08);
+
+  .left {
+    display: inline-block;
+
+    .icon {
+      margin-right: 6px;
+    }
+  }
+
+  .right{
+    float: right;
+
+    .icon {
+      margin-left: 1.4rem;
+    }
+  }
+
+  .send {
+    display: inline-block;
+  }
+
+  .text {
+    display: inline-block;
+    margin-left: 6px;
+  }
+}
+
+.editContent {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0 1rem;
+
+  textarea {
+    width: 100%;
+    background-color: #f4f4f4;
+    line-height: 1.5;
+    border: 0;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.editAtWrapper {
+  margin-left: 2px;
+  color: #666;
+}
+
+.editFooter {
+  padding:1rem;
+}
