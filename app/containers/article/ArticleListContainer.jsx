@@ -1,16 +1,38 @@
 import { hashHistory } from 'react-router';
+import { List, Map } from 'immutable';
 import { connect } from 'react-redux';
+
+import settings from '../../settings';
+
+import articleDataActions from '../../actions/articleData';
+import articleUIActions from '../../actions/articleUI';
 
 import ArticleList from '../../views/article/ArticleList.jsx';
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    isFetching: state.article.get('isFetching'),
+    lastUpdated: state.article.get('lastUpdated'),
+    count: state.article.get('count'),
+    list: state.article.get('list').toJSON(),
+    error: state.article.get('error').toJSON(),
+  };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    clickSider: function(id) {
-      hashHistory.push('/article/'+id);
+    initial: function(lastUpdated, count) {
+      if (count == 0) {
+        articleDataActions.fetchArticleList(0, settings.article.pagination);
+      } else {
+        if (Date.now() - lastUpdated > settings.timeout) {
+          articleUIActions.articleListInvalided();
+          articleDataActions.fetchArticleList(0, count);
+        }
+      }
+    },
+    addList: function(count) {
+      articleDataActions.fetchArticleList(count, count+settings.article.pagination);
     },
     clickCard: function(id) {
       hashHistory.push('/article/'+id);

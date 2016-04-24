@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import styles from './ArticleSlider.scss';
+import styles from './Slider.scss';
 
 // 测试图片导入
 const image1 = require("../../images/1.jpeg");
@@ -10,7 +10,7 @@ const image3 = require("../../images/3.jpeg");
 const image4 = require("../../images/4.jpeg");
 
 // 测试数据
-const itemList = [
+const slideList = [
   {
     id: 1,
     activityId: 10001,
@@ -33,17 +33,17 @@ const itemList = [
   }
 ]
 
-const SliderFlag = ({itemList, active}) => (
+const SliderFlag = ({slideList, active}) => (
   <div className={styles.flagWrapper}>
   {
-    itemList.map( (item) =>
+    slideList.map( (item) =>
       <span className={classnames(styles.flag, {[styles.flagActive]: item.id=== active})}></span>
     )
   }
   </div>
 );
 
-class ArticleSlider extends React.Component {
+class Slider extends React.Component {
   constructor(props) {
     super(props);
 
@@ -73,7 +73,6 @@ class ArticleSlider extends React.Component {
 
   // 实时滑动, 记录滑动数据, 更新信息
   swipeSliderMove(evt) {
-    console.log(1)
     evt.preventDefault();
 
     const touch = evt.touches[0];
@@ -119,7 +118,7 @@ class ArticleSlider extends React.Component {
   }
 
   clickSider() {
-    const _id = itemList[this.state.active - 1].activityId;
+    const _id = this.props.slideList[this.state.active - 1].activityId;
     this.props.clickSider(_id);
   }
 
@@ -128,7 +127,7 @@ class ArticleSlider extends React.Component {
         <div className={styles.slider} style={{width: this.innerWidth}}>
           <div
             className={styles.slideWrapper}
-            style={{width: itemList.length+"00%"}}
+            style={{width: this.props.slideList.length+"00%"}}
             onTouchStart={this.swipeSliderStart}
             onTouchMove={this.swipeSliderMove}
             onTouchEnd={this.swipeSliderEnd}
@@ -136,21 +135,22 @@ class ArticleSlider extends React.Component {
             ref={(dom) => this.slideWrapper = dom}
           >
             {
-              itemList.map( (item) =>
+              this.props.slideList.map( (item) =>
                 <div className={styles.slide} style={{width: window.innerWidth}}>
                   <img src={item.image} />
                 </div>
               )
             }
           </div>
-          <SliderFlag itemList={itemList} active={this.state.active} />
+          <SliderFlag slideList={this.props.slideList} active={this.state.active} />
         </div>
     );
   }
 }
 
-ArticleSlider.propTypes = {
+Slider.propTypes = {
   clickSider: React.PropTypes.func.isRequired,
+  slideList: React.PropTypes.array,
 }
 
-export default ArticleSlider;
+export default Slider;

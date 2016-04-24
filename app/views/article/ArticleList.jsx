@@ -1,20 +1,20 @@
 import React from 'react';
 import classnames from 'classnames';
+import { List, Map } from 'immutable';
 
 import NavBar from '../navbar/NavBar.jsx';
-import ArticleSlider from './ArticleSlider.jsx';
+import Slider from '../slider/Slider.jsx';
 
 import styles from './ArticleList.scss';
 
-import sectionList from './listData';
-
+// 文章块样式
 const ArticleCard = ({article, clickCard}) => (
   <div className={styles.cardWrapper} onClick={clickCard}>
-    <img src={article.imageURL} />
+    <img src={article.briefImage} />
     <div className={styles.title}>{article.title}</div>
     <div className={styles.meta}>
       <div className={styles.metaLeft}>
-        {article.meta.datetime}
+        一天前
       </div>
       <div className={styles.metaRight}>
         <div classname={styles.view}>
@@ -30,33 +30,40 @@ const ArticleCard = ({article, clickCard}) => (
   </div>
 );
 
+// 文章章节
 const ArticleSection = ({item, clickCard}) => (
   <div className={styles.section} >
     <div className={styles.sectionHeader}>
       {item.name}
     </div>
     <div className={styles.sectionContent}>
-      { item.articles.map( (articleItem) => (
-          <ArticleCard article={articleItem} clickCard={clickCard.bind(null, articleItem.articleId)}/>
+      { item.list.map( (articleItem) => (
+          <ArticleCard article={articleItem} clickCard={clickCard.bind(null, articleItem.id)}/>
       ))}
     </div>
   </div>
 );
 
+// 文章列表样式组件
 class ArticleList extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+  }
+
   render() {
+    const _list = this.props.list;
+    const _section = [{name: '近期消息', list: _list}];
     return (
       <div className={styles.articleList}>
         <NavBar active="article" />
         <div className={styles.articleContentWrapper}>
-          <ArticleSlider clickSider={this.props.clickSider}/>
+          {/* <Slider slideList={_activity} clickSider={this.props.clickSider}/> */}
           <div className={styles.articleSectionWrapper}>
             {
-              sectionList.map( (item) =>
+              _section.map( (item) =>
                 <ArticleSection item={item} clickCard={this.props.clickCard} />
               )
             }

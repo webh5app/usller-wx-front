@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRedirect, IndexRoute, hashHistory } from 'react-router';
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 
 // 全局数据处理
 import AppContainer from './containers/AppContainer.jsx';
@@ -17,15 +17,21 @@ import * as post from  './containers/post';
 // 账户功能 组件
 // import Account from './containers/account';
 
+import * as reducers from './reducers';
 
 // 创建 Redux 的 store
 const store = createStore(
-	applyMiddleware(
-		thunk
+  combineReducers(reducers),
+  applyMiddleware(
+		thunkMiddleware
 	),
 	window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
+//
+// POST 匿名数据
+// 返回给我一个 token 数据
+//
 
 // 使用 React-Router, 并挂载 React 渲染后的 DOM
 ReactDOM.render(

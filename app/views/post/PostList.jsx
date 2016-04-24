@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import NavBar from '../navbar/NavBar.jsx';
 import PostCard from './PostCard.jsx';
+import NavBar from '../navbar/NavBar.jsx';
 import EditTemplate from '../edit/EditTemplate.jsx';
 import IconFloatButton from '../../components/IconFloatButton/IconFloatButton.jsx';
 import ScrollUp from '../../components/ScrollUp/ScrollUp.jsx';

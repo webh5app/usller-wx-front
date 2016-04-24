@@ -13,13 +13,6 @@ import article from './detailData';
 const DetailHeader = ({header, clickReturn, clickLike, clickShare}) => (
   <div className={styles.articleHeader}>
     <div className={styles.headerTop}>
-      <div className={styles.headerFloatWrapper}>
-        <span className={classnames("fa", "fa-chevron-left", styles.return)} onClick={clickReturn}></span>
-        <div className={styles.headerRightWrapper}>
-          <span className={classnames("fa", "fa-thumbs-o-up", styles.like)} onClick={clickLike}></span>
-          <span className={classnames("fa", "fa-share-alt", styles.share)} onClick={clickShare}></span>
-        </div>
-      </div>
       <img src={header.banner} />
     </div>
     <div className={styles.headerTitle}>
@@ -29,13 +22,15 @@ const DetailHeader = ({header, clickReturn, clickLike, clickShare}) => (
       <span className={styles.activity}>{header.activity}</span>
       <span className={styles.datetime}>{header.datetime}</span>
     </div>
-    <div className={styles.headerOpt}>
-      <span className={classnames("fa", "fa-eye", styles.icon)}></span>
-      <span className={styles.number}>{header.info.view}</span>
-      <span className={classnames("fa", "fa-thumbs-up", styles.icon)}></span>
-      <span className={styles.number}>{header.info.like}</span>
-      <span className={classnames("fa", "fa-comments", styles.icon)}></span>
-      <span className={styles.number}>{header.info.comment}</span>
+    <div className={styles.operateWrapper}>
+      <div className={styles.operateItem}>
+        <span className={classnames("fa", "fa-heart-o", styles.icon)} />
+        喜欢
+      </div>
+      <div className={styles.operateItem}>
+        <span className={classnames("fa", "fa-share-alt", styles.icon)} />
+        分享
+      </div>
     </div>
   </div>
 );
@@ -127,6 +122,17 @@ class ArticleDetail extends React.Component {
           }}
           icon='pencil'
           click={this.articleEdit.bind(null, null)}
+        />
+
+        <IconFloatButton
+          position={{
+            bottom: '1rem',
+            left: '1rem',
+            zIndex: '100',
+          }}
+          icon='chevron-left'
+          bgColor="rgba(0,0,0,0.78)"
+          click={this.articleReturn}
         />
 
         {

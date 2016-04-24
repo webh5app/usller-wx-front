@@ -9,6 +9,7 @@
 .articleHeader {
   width: 100%;
   background: white;
+  padding-bottom: 1rem;
 }
 
 .headerTop {
@@ -16,36 +17,6 @@
     width: 100%;
     height: 200px;
     background-size: cover;
-  }
-}
-
-.headerFloatWrapper {
-  position: fixed;
-  top: .5rem;
-  left: 1rem;
-  right: 1rem;
-  z-index: 100;
-
-  span {
-    display: inline-block;
-    line-height: 1;
-    font-size: 16px;
-    padding: 13px 13px 11px 11px;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    border-radius: 500px;
-    color: white;
-    background-color: rgba(0,0,0,0.72);
-  }
-
-  .like {
-    margin-right: 1rem;
-    background-color: rgba(255,78,78,0.78);
-  }
-
-  .share {
-    background-color: rgba(30,144,255,0.78);
   }
 }
 
@@ -91,21 +62,34 @@
   }
 }
 
-.headerOpt {
-  margin-top: 1.7rem;
-  padding: 0 1rem;
-  padding-bottom: .5rem;
+.operateWrapper {
+  position: absolute;
+  right: 0;
+  top: 5rem;
+  z-index: 100;
+}
 
-  .number {
-    color: #aaa;
-    font-size: 12px;
-    margin-right: 1rem;
+.operateItem {
+  position: relative;
+  margin-top: 1rem;
+  padding: .5rem .8rem .4rem .8rem;
+  border-radius: 2px 0 0 2px;
+  background-color: white;
+  color: #FB7070;
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.24);
+
+  &:before {
+    position: absolute;
+    content: "";
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 3px;
+    background-color: #FB7070;
   }
 
   .icon {
-    font-size: 13px;
-    color: #aaa;
-    margin-right: .3rem;
+    margin-right: 6px;
   }
 }
 
