@@ -14,18 +14,18 @@ export function thunkFetchAndGetResult(dispatch, url, actionCallback) {
 }
 
 // 请求发送数据, 并确认结果
-export function thunkPostAndGetResult(dispath, url, sendData, actionCallback) {
-  dispath(actionCallback(settings.fetchStatus.REQUEST));
+export function thunkPostAndGetResult(dispatch, url, sendData, actionCallback) {
+  dispatch(actionCallback(settings.fetchStatus.REQUEST));
   return fetch(url, {
     method: 'post',
     headers: {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify(sendData),
+    body: sendData,
   })
   .then(response => response.json())
   .then(json => {
-    if (json.meta.error.isError) throw json.meta.error.errorName;
+    if (json.errcode != 0) throw 'Error';
     dispatch(actionCallback(settings.fetchStatus.SUCCESS, json))
   })
   .catch(message => dispatch(actionCallback(settings.fetchStatus.FAILURE, message)));
@@ -34,7 +34,7 @@ export function thunkPostAndGetResult(dispath, url, sendData, actionCallback) {
 // 请求更新数据, 无需任何确认
 export function thunkPutAndNotResult(url, updateData) {
   return fetch(url, {
-    method: 'put',
+    method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },

@@ -1,10 +1,9 @@
 import * as userActions from '../actions/user';
 import { fromJS, List, Map } from 'immutable';
-import jwt
 
 import settings from '../settings';
 
-const user = {
+const userInitial = {
   isFetching: false,
   token: null,
   id: null,
@@ -15,11 +14,11 @@ const user = {
   error: {},
 }
 
-export default user(state=fromJS(), action) {
+export default function user(state=fromJS(userInitial), action) {
   switch (action.type) {
-    case userActions.fetchStatus.FETCH_USER_TOKEN:
+    case userActions.FETCH_USER_TOKEN:
       switch (action.status) {
-        case settings.REQUEST:
+        case settings.fetchStatus.REQUEST:
           return state
             .set('isFetching', true);
 
@@ -28,6 +27,7 @@ export default user(state=fromJS(), action) {
           const _name = 'nihao';
           const _portrait = '1';
           // 解析 token
+          console.log(action.message)
           return state
             .set('isFetching', false)
             .set('token', action.message.token)

@@ -19,6 +19,8 @@ import * as post from  './containers/post';
 
 import * as reducers from './reducers';
 
+import * as userActions from './actions/user';
+
 // 创建 Redux 的 store
 const store = createStore(
   combineReducers(reducers),
@@ -30,6 +32,7 @@ const store = createStore(
 
 // 获取 token 并注入到 user 中
 // store.dispath(fetchUserToken({username: '', password: ''}))
+store.dispatch(userActions.fetchUserToken({username: '', password: ''}));
 //
 
 // 使用 React-Router, 并挂载 React 渲染后的 DOM

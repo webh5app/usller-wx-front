@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import DateTimeSpan from '../../components/DateTimeSpan/DateTimeSpan';
+
 import styles from './CommentItem.scss';
 
 class CommentItem extends React.Component {
@@ -12,29 +14,25 @@ class CommentItem extends React.Component {
     return (
       <div className={styles.response}>
         <span className={styles.light}>题主回复: </span>
-        <span className={styles.body}>{ response }</span>
-      </div> : null
+        <span className={styles.body}>{ response.content }</span>
+      </div>
     );
   }
 
   render() {
     const comment = this.props.comment;
-
     return (
       <div className={styles.commentItemContainer}>
         <div className={styles.profile}>
-          <img src={comment.author.imageURL} />
+          <img src={comment.user.portrait} />
         </div>
         <div className={styles.mainContent}>
           <div className={styles.header}>
-            { comment.author.name }
-          </div>
-          <div className={styles.body}>
-            { comment.content }
+            { comment.user.name }
           </div>
           <div className={styles.footer}>
             <div className={styles.right}>
-              <div className={styles.clickItem} onClick={this.props.clickComment.bind(null, comment.author.name)}>
+              <div className={styles.clickItem} onClick={this.props.clickComment.bind(null, comment.user.id)}>
                 <span className={classnames('fa', 'fa-comments', styles.icon)} />
                 回复
               </div>
@@ -44,11 +42,18 @@ class CommentItem extends React.Component {
               </div>
             </div>
             <div className={styles.left}>
-              { comment.datetime }
+              <DateTimeSpan
+                styles={{size: '12px', color: '#4f4f4f', isBold: false}}
+                type="Readable"
+                datetime={comment.meta.datetime}
+              />
+            </div>
+            <div className={styles.body}>
+              { comment.body }
             </div>
           </div>
         </div>
-        { comment.response ? this.renderResponse(comment.response):null }
+        { comment.response ? this.renderResponse(comment.response) : null }
       </div>
     );
   }

@@ -54,15 +54,14 @@ function fetchCommentListAction(status, message) {
 }
 
 export function fetchCommentList(resourceId) {
-  return dispatch => {
-    const url = `${settings.url.prefix}/articleComment/${resourceId}`
-    return dispatch =>
-      actionDataUtils.thunkFetchAndGetResult(dispatch, url, fetchCommentListAction)
-  }
+  const url = `${settings.url.prefix}/article/${resourceId}/comment/`
+  return dispatch =>
+    actionDataUtils.thunkFetchAndGetResult(dispatch, url, fetchCommentListAction)
 }
 
 /* 提交文章评论信息 */
 // ==================================================================== //
+// 提交评论回调 Action
 export const POST_COMMENT = 'POST_COMMENT';
 function postCommentAction(status, message) {
   return {
@@ -72,27 +71,24 @@ function postCommentAction(status, message) {
   }
 }
 
-export function postComment(resourceId, data, token) {
-  const url = `${settings.url.prefix}/article/${aritcle}/comment`;
-  data.token = token;
+// 提交评论
+export function postComment(articleId, data) {
+  const url = `${settings.url.prefix}/article/${articleId}/comment/`;
   return dispatch =>
     actionDataUtils.thunkPostAndGetResult(dispatch, url, data, postCommentAction);
 }
 
-// 更新信息
-// ==================================================================== //
-export function putArticleDetail(articleId, data, token) {
-  const url = `${settings.url.prefix}/article/${articleId}`;
-  // data.token = token;
+// 为文章点赞
+export function postArticleLike(articleId, data) {
+  const url = `${settings.url.prefix}/article/${articleId}/like/`;
   return dispatch => {
     return actionDataUtils.thunkPutAndNotResult(url, data);
-
   }
 }
 
-export function putComment(articleId, data, token) {
-  const url = `${settings.url.prefix}/article/${articleId}/comment`;
-  data.token = token;
+// 为文章的评论点赞
+export function postCommentLike(articleId, cid, data) {
+  const url = `${settings.url.prefix}/article/${articleId}/comment/${cid}/like/`;
   return dispatch =>
     actionDataUtils.thunkPutAndNotResult(url, data);
 }

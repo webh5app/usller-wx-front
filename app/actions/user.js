@@ -30,11 +30,16 @@ function updateUserInfoAction(status, info) {
   }
 }
 
+// export function fetchUserToken(info) {
+//   const url = `${settings.prefix.url}/token`;
+//   return dispatch =>
+//     actionDataUtils.thunkPostAndGetResult(dispatch, url, info, fetchUserInfoAction)
+// }
 export function fetchUserToken(info) {
-  const url = `${settings.prefix.url}/token`;
   return dispatch =>
-    actionDataUtils.thunkPostAndGetResult(dispatch, url, info, fetchUserInfoAction)
+    dispatch(fetchUserTokenAction(settings.fetchStatus.SUCCESS, {token: 'cc5f419af829ddcc77978e07b9efc164f83e6d61'}));
 }
+
 
 export function fetchUserInfo(urlId) {
   const url = `${settings.prefix.url}/user/${userId}`;

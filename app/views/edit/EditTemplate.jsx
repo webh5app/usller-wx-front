@@ -11,13 +11,8 @@ class EditTemplate extends React.Component {
       content: '',
     }
 
-    this.clickImage = this.clickImage.bind(this);
     this.clickSend = this.clickSend.bind(this);
     this.clickChange = this.clickChange.bind(this);
-  }
-
-  clickImage() {
-    console.log('Edit Image');
   }
 
   clickSend() {
@@ -46,7 +41,6 @@ class EditTemplate extends React.Component {
               关闭
           </div>
           <div className={styles.right}>
-            <span className={classnames('fa', 'fa-picture-o', styles.icon)} onClick={this.clickImage}></span>
             <div className={styles.send} onClick={this.clickSend}>
               <span className={classnames('fa', 'fa-send', styles.icon)}/>
               <span className={styles.text}>发送</span>

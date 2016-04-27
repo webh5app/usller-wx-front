@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import DateTimeSpan from '../../components/DateTimeSpan/DateTimeSpan.jsx';
+
 import styles from './ArticleNormalCard.scss';
 
 class ArticleNormalCard extends React.Component {
@@ -8,10 +10,7 @@ class ArticleNormalCard extends React.Component {
     super(props);
   }
 
-  calcTime(datetime) {
-    return '1天前';
-  }
-
+  // 计算是否显示提示标签
   renderLabel() {
     const _now = Date.now();
     const _meta = this.props.meta;
@@ -21,7 +20,6 @@ class ArticleNormalCard extends React.Component {
 
     if (_now - _meta.created_at < 24*60*60*1000) isNew = true;
     if (_v > 100) isHot = true;
-
 
     return (
       <div className={styles.labelWrapper}>
@@ -43,10 +41,12 @@ class ArticleNormalCard extends React.Component {
           {this.props.title}
         </div>
         <div className={styles.meta}>
-          <span className={styles.metaItem}> {this.props.meta.view} 人看过 ·</span>
-          <span className={styles.metaItem}> {this.props.meta.like} 人喜欢 ·</span>
+          <span className={styles.metaItem}> {this.props.meta.view} 人看过·</span>
+          <span className={styles.metaItem}> {this.props.meta.like} 人喜欢·</span>
           <span className={styles.metaItem}> {this.props.meta.comment} 人评论·</span>
-          <span className={styles.metaItem}> {this.calcTime()}</span>
+          <span className={styles.metaItem}>
+            <DateTimeSpan type="Readable" datetime={this.props.meta.created_at} />
+          </span>
         </div>
       </div>
     )

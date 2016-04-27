@@ -5,6 +5,7 @@ import 'whatwg-fetch';
 import EditTemplate from '../edit/EditTemplate.jsx';
 import CommentTemplate from '../comment/CommentTemplate.jsx';
 import IconFloatButton from '../../components/IconFloatButton/IconFloatButton.jsx';
+import DateTimeSpan from '../../components/DateTimeSpan/DateTimeSpan.jsx';
 
 import styles from './ArticleDetail.scss';
 
@@ -17,8 +18,13 @@ const DetailHeader = ({article, clickReturn, clickLike, clickShare}) => (
     <div className={styles.headerTitle}>
       {article.title}
     </div>
-    <div className={styles.headerBottom}>
-      <span className={styles.datetime}>{}</span>
+    <div className={styles.headerMeta}>
+      <span className={styles.metaItem}> {article.meta.view} 人看过·</span>
+      <span className={styles.metaItem}> {article.meta.like} 人喜欢·</span>
+      <span className={styles.metaItem}> {article.meta.comment} 人评论·</span>
+      <span className={styles.metaItem}>
+        <DateTimeSpan type="Readable" datetime={article.meta.created_at} />
+      </span>
     </div>
     <div className={styles.operateWrapper}>
       <div className={styles.operateItem}>
@@ -40,7 +46,7 @@ const DetailContent = ({body}) => (
       正文
     </div>
     <div className={styles.contentBody}>
-      <div dangerouslySetInnerHTML={{__html: body}} />
+      <div dangerouslySetInnerHTML={{__html: body}}></div>
     </div>
   </div>
 );
@@ -71,13 +77,7 @@ class ArticleDetail extends React.Component {
     // 从顶部显示
     window.scrollTo(0,0);
 
-    this.props.initial(this.props.params.articleId);
-
-    // if (!this.props.article.meta.viewEnable) {
-      // this.props.viewed(this.props.params.articleId);
-    // }
-
-    console.log(this.props)
+    this.props.initial(this.props.detail, this.props.params.articleId);
   }
 
   articleLike() {
@@ -89,7 +89,11 @@ class ArticleDetail extends React.Component {
   }
 
   articleReturn() {
-    history.go(-1);
+    if (history.length <= 2) {
+      this.props.toArticleList();
+    } else {
+      history.go(-1);
+    }
   }
 
   articleEdit(atName) {
@@ -105,13 +109,25 @@ class ArticleDetail extends React.Component {
   }
 
   editSend(data) {
-    console.log("Edit Send: data > " + data);
     this.setState({activeEdit: false});
+    this.props.postComment(this.props.article.id, data, this.props.user.token)
   }
 
   render() {
     const _article = this.props.article;
-    const _comment = this.props.comment;
+    let _comment = [];
+
+    // 当数据没加载时的预设逻辑
+    if (!this.props.comment.comment) {
+        _comment = [];
+    } else {
+      _comment = this.props.comment.comment;
+    }
+
+    if (!_article.meta) {
+      _article.meta = [];
+    }
+
     return (
       <div className={styles.articleDetail}>
         <DetailHeader
@@ -122,9 +138,7 @@ class ArticleDetail extends React.Component {
         />
       <DetailContent body={_article.body} />
         {
-        /*
-        <CommentTemplate commentList={_comment} clickEdit={this.articleEdit} clickLike={this.articleLike}/>
-        */
+          <CommentTemplate commentList={_comment} clickEdit={this.articleEdit} clickLike={this.articleLike}/>
         }
         <IconFloatButton
           position={{

@@ -61,7 +61,9 @@ export default function article(state=fromJS(listInitialState), action) {
         case settings.fetchStatus.FAILURE:
           return state
             .set('isFetching', false)
-            .set('error', Map(action.message));
+            .setIn(['error', 'isError'], true)
+            .setIn(['error', 'errorName'], 'fetchArticleListFailure')
+            .setIn(['error', 'errorMessage'], '获取文章列表失败');
 
         default:
           return state;
@@ -100,7 +102,9 @@ export default function article(state=fromJS(listInitialState), action) {
         case settings.fetchStatus.FAILURE:
           return state
             .set('isFetching', false)
-            .set('error', Map(action.message));
+            .setIn(['error', 'isError'], true)
+            .setIn(['error', 'errorName'], 'fetchArticleDetailFailure')
+            .setIn(['error', 'errorMessage'], '获取文章失败')
 
         default:
           return state;
@@ -120,24 +124,26 @@ export default function article(state=fromJS(listInitialState), action) {
             .set('isFetching', true);
 
         case settings.fetchStatus.SUCCESS:
-          // message: {articleId, count, lastUpdated, comment[]}
-          // _comment[]: {cid, user: {userId, userName, userPortrait}, body, meta: {like, datetime, isMylike, isMyView}, response}
-          const _comment = action.message.comment;
+          // message: { meta: { articleId, count, lastUpdated } , @data}
+          // @data[]: {cid, user: {id, name, portrait}, body, meta: {like, likeEnable, datetime}, response}
+          const _commentList = action.message;
           const newCommentItem = fromJS({
-            articleId: action.message.articleId,
+            articleId: _commentList.meta.articleId,
             lastUpdated: Date.now(),
-            count: action.message.count,
-            list: _comment,
+            count: _commentList.meta.count,
+            comment: fromJS(_commentList.data),
           })
 
           return state
             .set('isFetching', false)
-            .update('comment', (obj) => obj.set([action.message.articleId], newCommentItem));
+            .update('comment', (obj) => obj.set(''+_commentList.meta.articleId, newCommentItem));
 
         case settings.fetchStatus.FAILURE:
           return state
             .set('isFetching', false)
-            .set('error', Map(action.message));
+            .setIn(['error', 'isError'], true)
+            .setIn(['error', 'errorName'], 'fetchCommentListFailure')
+            .setIn(['error', 'errorMessage'], '获取文章评论失败')
 
         default:
           return state
@@ -153,8 +159,6 @@ export default function article(state=fromJS(listInitialState), action) {
         case settings.fetchStatus.SUCCESS:
           return state
             .set('isFetching', false)
-            .updateIn(['detail', message.articleId, 'meta','comment'], (val) => val += 1)
-            .setIn(['detail', message.articleId], message)
 
         case settings.fetchStatus.FAILURE:
           return state

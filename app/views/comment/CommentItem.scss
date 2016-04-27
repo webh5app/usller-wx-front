@@ -1,6 +1,6 @@
 .commentItemContainer {
   margin: 0 1rem;
-  padding: 1.2rem 0;
+  padding: 1.5rem 0 .7rem 0;
   border-bottom: 1px dashed rgba(0,0,0,0.24);
 
   &:last-child {
@@ -34,9 +34,9 @@
   }
 
   .body {
-    color: #666;
+    color: #4f4f4f;
     margin-top: 1rem;
-    font-size: 12px;
+    line-height: 1.6;
     letter-spacing: .5px;
 
   }
@@ -44,7 +44,7 @@
   .footer {
     color: #666;
     font-size: 12px;
-    margin-top: 1rem;
+    margin-top: .7rem;
 
     .right {
       float: right;
@@ -68,7 +68,7 @@
 
   line-height: 1.6;
   font-size: 12px;
-  background-color: rgba(0,0,0,0.08);
+  background-color: rgba(0,0,0,0.05);
 
   .light {
     font-weight: bold;

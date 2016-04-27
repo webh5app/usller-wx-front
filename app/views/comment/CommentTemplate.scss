@@ -1,6 +1,7 @@
 .postCommentList {
   margin-top: 2rem;
   background-color: white;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.12);
 }
 
 .commentHeader {
@@ -14,6 +15,16 @@
     top: .8rem;
     bottom: .8rem;
     left: 0;
+    width: 3px;
+    background-color: #FB7070;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: .8rem;
+    bottom: .8rem;
+    right: 0;
     width: 3px;
     background-color: #FB7070;
   }

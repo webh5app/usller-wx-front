@@ -18,6 +18,7 @@ class ArticleList extends React.Component {
 
     this.state = {
       isBottom: false,
+      data: '',
     }
 
     this.listenScroll = this.listenScroll.bind(this);
@@ -64,7 +65,7 @@ class ArticleList extends React.Component {
         }
         </div>
         {
-          this.state.isBottom ? <LoadTip info="正在从后台获取数据, 请稍后"/> : null
+          this.state.isBottom && this.props.isFetching ? <LoadTip info="正在从后台获取数据, 请稍后"/> : null
         }
       </div>
     );

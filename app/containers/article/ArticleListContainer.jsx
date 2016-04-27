@@ -35,7 +35,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     // 碰到底端
     addList: function(count) {
-      console.log(count);
       dispatch(articleDataActions.fetchArticleList(count, count+settings.article.pagination));
     },
     clickCard: function(id) {

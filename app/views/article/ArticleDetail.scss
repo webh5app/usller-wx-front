@@ -10,6 +10,7 @@
   width: 100%;
   background: white;
   padding-bottom: 1rem;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.12);
 }
 
 .headerTop {
@@ -30,6 +31,7 @@
   padding: 0 1rem;
   font-size: 1.2rem;
   font-weight: bold;
+  word-wrap: break-word;
 
   &::before {
     position: absolute;
@@ -42,25 +44,13 @@
   }
 }
 
-.headerBottom {
-  margin-top: 1.3rem;
+.headerMeta {
+  margin-top: 2rem;
   padding: 0 1rem;
-
-  .activity {
-    padding: 2px 4px;
-    color: #37ccff;
-    font-size: 12px;
-    border-radius: 2px;
-    border: 1px solid #37ccff;
-    margin-right: .8rem;
-  }
-
-  .datetime {
-    color: #666;
-    font-size: 12px;
-    margin-right: .5rem;
-  }
+  font-size: 12px;
+  color: #666;
 }
+
 
 .operateWrapper {
   position: absolute;
@@ -99,6 +89,7 @@
   margin-top: 2rem;
   width: 100%;
   background-color: white;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.12);
 }
 
 .contentHeader {
@@ -118,8 +109,8 @@
 }
 
 .contentBody {
-  padding: 0 1rem 1rem 1rem;
-  color: #333;
-  line-height: 1.8;
+  padding: 0 1rem 2rem 1rem;
+  color: #4f4f4f;
+  line-height: 1.7;
   letter-spacing: .5px;
 }
