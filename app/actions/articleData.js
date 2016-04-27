@@ -1,5 +1,6 @@
 import settings from '../settings';
-import actionUtils from './actionUtils';
+import * as actionDataUtils from './actionDataUtils';
+import * as actionUIActions from './articleUI';
 
 
 /* Get Article List */
@@ -7,15 +8,16 @@ import actionUtils from './actionUtils';
 export const FETCH_ARTICLE_LIST = 'FETCH_ARTICLE_LIST';
 function fetchArticleListAction(status, message) {
   return {
-    type: FETCH_ARTICLE_LIST_FAILURE,
+    type: FETCH_ARTICLE_LIST,
     status: status,
     message: message,
   }
 }
 
 export function fetchArticleList(start, end) {
-  const url = `${settings.url.prefix}/article?start=${start}&end=${end}`;
-  return actionUtils.thunkFetchAndGetResult(dispatch, url, fetchArticleListAction);
+  const url = `${settings.url.prefix}/article/?rangeStart=${start}&rangeEnd=${end}`;
+  return (dispatch) =>
+    actionDataUtils.thunkFetchAndGetResult(dispatch, url, fetchArticleListAction);
 }
 
 
@@ -26,16 +28,17 @@ export function fetchArticleList(start, end) {
 export const FETCH_ARTICLE_DETAIL = 'FETCH_ARTICLE_DETAIL';
 function fetchArticleDetailAction(status, message) {
   return {
-    type: FETCH_ARTICLE_DETAIL_FAILURE,
+    type: FETCH_ARTICLE_DETAIL,
     status: status,
     message: message,
   }
 }
 
 // 通过 resourceId 来获取文章
-export function fetchArticleDetail(resourceId) {
-  const url = `${settings.url.prefix}/article/${resourceId}`
-  return actionUtils.thunkFetchAndGetResult(dispatch, url, fetchArticleDetailAction);
+export function fetchArticleDetail(articleId) {
+  const url = `${settings.url.prefix}/article/${articleId}/`
+  return dispatch =>
+    actionDataUtils.thunkFetchAndGetResult(dispatch, url, fetchArticleDetailAction);
 }
 
 
@@ -53,7 +56,8 @@ function fetchCommentListAction(status, message) {
 export function fetchCommentList(resourceId) {
   return dispatch => {
     const url = `${settings.url.prefix}/articleComment/${resourceId}`
-    return actionUtils.thunkFetchAndGetResult(dispatch, url, fetchCommentListAction)
+    return dispatch =>
+      actionDataUtils.thunkFetchAndGetResult(dispatch, url, fetchCommentListAction)
   }
 }
 
@@ -68,14 +72,27 @@ function postCommentAction(status, message) {
   }
 }
 
-export function postComment(resourceId, data) {
-  const url = `${settings.url.prefix}/articleComment`
-  return actionUtils.thunkPostAndGetResult(dispatch, url, data, postCommentAction);
+export function postComment(resourceId, data, token) {
+  const url = `${settings.url.prefix}/article/${aritcle}/comment`;
+  data.token = token;
+  return dispatch =>
+    actionDataUtils.thunkPostAndGetResult(dispatch, url, data, postCommentAction);
 }
 
-/* Update Article Detail 信息 */
+// 更新信息
 // ==================================================================== //
-export function postArticleDetail(resourceId, data) {
-  const url = `${settings.url.prefix}/article/${resourceId}`
-  return actionUtils.thunkUpdateAndNotResult(dispatch, url, data, updateArticleDetailAction)
+export function putArticleDetail(articleId, data, token) {
+  const url = `${settings.url.prefix}/article/${articleId}`;
+  // data.token = token;
+  return dispatch => {
+    return actionDataUtils.thunkPutAndNotResult(url, data);
+
+  }
+}
+
+export function putComment(articleId, data, token) {
+  const url = `${settings.url.prefix}/article/${articleId}/comment`;
+  data.token = token;
+  return dispatch =>
+    actionDataUtils.thunkPutAndNotResult(url, data);
 }

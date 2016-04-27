@@ -1,0 +1,29 @@
+.loadTipContainer,
+.loadTipContainerIsLoaded {
+  margin: 0 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 2px 2px 0 0;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12);
+}
+
+.icon {
+  animation: spin 4s infinite linear;
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.info {
+  display: inline-block;
+  margin-left: 1rem;
+}

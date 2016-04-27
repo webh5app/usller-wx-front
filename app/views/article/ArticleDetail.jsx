@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import 'whatwg-fetch';
 
 import EditTemplate from '../edit/EditTemplate.jsx';
 import CommentTemplate from '../comment/CommentTemplate.jsx';
@@ -7,20 +8,17 @@ import IconFloatButton from '../../components/IconFloatButton/IconFloatButton.js
 
 import styles from './ArticleDetail.scss';
 
-import article from './detailData';
-
 // 文章细节页面头
-const DetailHeader = ({header, clickReturn, clickLike, clickShare}) => (
+const DetailHeader = ({article, clickReturn, clickLike, clickShare}) => (
   <div className={styles.articleHeader}>
     <div className={styles.headerTop}>
-      <img src={header.banner} />
+      <img src={article.bannerImage} />
     </div>
     <div className={styles.headerTitle}>
-      {header.title}
+      {article.title}
     </div>
     <div className={styles.headerBottom}>
-      <span className={styles.activity}>{header.activity}</span>
-      <span className={styles.datetime}>{header.datetime}</span>
+      <span className={styles.datetime}>{}</span>
     </div>
     <div className={styles.operateWrapper}>
       <div className={styles.operateItem}>
@@ -36,13 +34,13 @@ const DetailHeader = ({header, clickReturn, clickLike, clickShare}) => (
 );
 
 // 文章细节页面的常用组件
-const DetailContent = ({content}) => (
+const DetailContent = ({body}) => (
   <div className={styles.articleContent}>
     <div className={styles.contentHeader}>
       正文
     </div>
     <div className={styles.contentBody}>
-      <div dangerouslySetInnerHTML={{__html: content}} />
+      <div dangerouslySetInnerHTML={{__html: body}} />
     </div>
   </div>
 );
@@ -72,6 +70,14 @@ class ArticleDetail extends React.Component {
   componentDidMount() {
     // 从顶部显示
     window.scrollTo(0,0);
+
+    this.props.initial(this.props.params.articleId);
+
+    // if (!this.props.article.meta.viewEnable) {
+      // this.props.viewed(this.props.params.articleId);
+    // }
+
+    console.log(this.props)
   }
 
   articleLike() {
@@ -104,16 +110,22 @@ class ArticleDetail extends React.Component {
   }
 
   render() {
+    const _article = this.props.article;
+    const _comment = this.props.comment;
     return (
       <div className={styles.articleDetail}>
         <DetailHeader
-          header={article.header}
+          article={_article}
           clickReturn={this.articleReturn}
           clickLike={this.articleLike}
           clickShare={this.articleShare}
         />
-        <DetailContent content={article.content} />
-        <CommentTemplate commentList={article.comments} clickEdit={this.articleEdit} clickLike={this.articleLike}/>
+      <DetailContent body={_article.body} />
+        {
+        /*
+        <CommentTemplate commentList={_comment} clickEdit={this.articleEdit} clickLike={this.articleLike}/>
+        */
+        }
         <IconFloatButton
           position={{
             bottom: '1rem',

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRedirect, IndexRoute, hashHistory } from 'react-router';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 // 全局数据处理
 import AppContainer from './containers/AppContainer.jsx';
@@ -22,15 +22,14 @@ import * as reducers from './reducers';
 // 创建 Redux 的 store
 const store = createStore(
   combineReducers(reducers),
-  applyMiddleware(
-		thunkMiddleware
-	),
-	window.devToolsExtension ? window.devToolsExtension() : f => f
+  compose(
+    applyMiddleware(thunk),
+  	window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
 );
 
-//
-// POST 匿名数据
-// 返回给我一个 token 数据
+// 获取 token 并注入到 user 中
+// store.dispath(fetchUserToken({username: '', password: ''}))
 //
 
 // 使用 React-Router, 并挂载 React 渲染后的 DOM

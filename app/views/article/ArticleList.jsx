@@ -4,71 +4,68 @@ import { List, Map } from 'immutable';
 
 import NavBar from '../navbar/NavBar.jsx';
 import Slider from '../slider/Slider.jsx';
+import LoadTip from '../loadtip/LoadTip.jsx';
+
+import ArticleNormalCard from './ArticleNormalCard.jsx';
 
 import styles from './ArticleList.scss';
 
-// 文章块样式
-const ArticleCard = ({article, clickCard}) => (
-  <div className={styles.cardWrapper} onClick={clickCard}>
-    <img src={article.briefImage} />
-    <div className={styles.title}>{article.title}</div>
-    <div className={styles.meta}>
-      <div className={styles.metaLeft}>
-        一天前
-      </div>
-      <div className={styles.metaRight}>
-        <div classname={styles.view}>
-          <span className={classnames("fa", 'fa-eye', styles.icon)} />
-          {article.meta.view}
-        </div>
-        <div className={styles.comment}>
-          <span className={classnames("fa", 'fa-comment', styles.icon)} />
-          {article.meta.comment}
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-// 文章章节
-const ArticleSection = ({item, clickCard}) => (
-  <div className={styles.section} >
-    <div className={styles.sectionHeader}>
-      {item.name}
-    </div>
-    <div className={styles.sectionContent}>
-      { item.list.map( (articleItem) => (
-          <ArticleCard article={articleItem} clickCard={clickCard.bind(null, articleItem.id)}/>
-      ))}
-    </div>
-  </div>
-);
 
 // 文章列表样式组件
 class ArticleList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isBottom: false,
+    }
+
+    this.listenScroll = this.listenScroll.bind(this);
   }
 
   componentDidMount() {
+    this.props.initial(this.props.lastUpdated, this.props.count);
+    // 监测碰到底端
+    document.addEventListener('scroll', this.listenScroll, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.listenScroll, false);
+  }
+
+  listenScroll() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !this.state.isBottom) {
+      this.props.addList(this.props.count);
+      this.setState({isBottom: true});
+    }
+
+    if ((window.innerHeight + window.scrollY ) < document.body.offsetHeight - 200 && this.state.isBottom) {
+      this.setState({isBottom: false});
+    };
   }
 
   render() {
     const _list = this.props.list;
-    const _section = [{name: '近期消息', list: _list}];
     return (
-      <div className={styles.articleList}>
+      <div className={styles.articleListContainer}>
         <NavBar active="article" />
-        <div className={styles.articleContentWrapper}>
-          {/* <Slider slideList={_activity} clickSider={this.props.clickSider}/> */}
-          <div className={styles.articleSectionWrapper}>
-            {
-              _section.map( (item) =>
-                <ArticleSection item={item} clickCard={this.props.clickCard} />
-              )
-            }
-          </div>
+        {/* <Slider slideList={_activity} clickSider={this.props.clickSider}/> */}
+        <div className={styles.articleCardWrapper}>
+        {
+          _list.map( (item) =>
+            <ArticleNormalCard
+              id={item.id}
+              meta={item.meta}
+              image={item.briefImage}
+              title={item.title}
+              clickCard={this.props.clickCard}
+            />
+          )
+        }
         </div>
+        {
+          this.state.isBottom ? <LoadTip info="正在从后台获取数据, 请稍后"/> : null
+        }
       </div>
     );
   }

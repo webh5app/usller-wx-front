@@ -1,10 +1,10 @@
 const settings = {
   url: {
-    prefix: '/apis/v1',
+    prefix: 'http://192.168.42.199:3000/apis/v1',
   },
 
   article: {
-    pagination: 20,
+    pagination: 10,
     timeout: 24*60*60*1000,
   },
 

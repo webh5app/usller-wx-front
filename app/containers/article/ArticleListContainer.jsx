@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 
 import settings from '../../settings';
 
-import articleDataActions from '../../actions/articleData';
-import articleUIActions from '../../actions/articleUI';
+import * as articleDataActions from '../../actions/articleData';
+import * as articleUIActions from '../../actions/articleUI';
 
 import ArticleList from '../../views/article/ArticleList.jsx';
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -21,9 +22,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // 初始化数据
     initial: function(lastUpdated, count) {
       if (count == 0) {
-        articleDataActions.fetchArticleList(0, settings.article.pagination);
+        dispatch(articleDataActions.fetchArticleList(0, settings.article.pagination));
       } else {
         if (Date.now() - lastUpdated > settings.timeout) {
           articleUIActions.articleListInvalided();
@@ -31,8 +33,10 @@ const mapDispatchToProps = (dispatch) => {
         }
       }
     },
+    // 碰到底端
     addList: function(count) {
-      articleDataActions.fetchArticleList(count, count+settings.article.pagination);
+      console.log(count);
+      dispatch(articleDataActions.fetchArticleList(count, count+settings.article.pagination));
     },
     clickCard: function(id) {
       hashHistory.push('/article/'+id);

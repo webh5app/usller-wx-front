@@ -1,0 +1,58 @@
+.articleNormalCardContainer {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  margin-top: 1.5rem;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12);
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px 2px 0 0;
+  background-size: cover;
+  border: none;
+}
+
+.labelWrapper {
+  position: absolute;
+  top: 0;
+  right: .6rem;
+}
+
+.labelNew,
+.labelHot {
+  margin-top: 1rem;
+  padding: 6px .8rem;
+  line-height: 1;
+  font-size: 12px;
+  color: white;
+  border-radius: 2px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.12);
+}
+
+.labelHot {
+  background-color: #FF617E;
+}
+
+.labelNew {
+  background-color: #22bbf6;
+}
+
+.titleWrapper {
+  margin-top: 1rem;
+  padding: 0 1rem;
+  background-color: white;
+  font-weight: bold;
+  letter-spacing: .5px;
+  line-height: 1.6;
+}
+
+.meta {
+  margin-top: 1.4rem;
+  padding: 0 1rem 1rem 1rem;
+  font-size: 12px;
+  color: #666;
+}
