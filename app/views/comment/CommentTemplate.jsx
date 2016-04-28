@@ -20,7 +20,7 @@ class CommentTemplate extends React.Component {
         <div className={styles.commentList}>
         {
           this.props.commentList.map( (comment) =>
-            <CommentItem comment={comment} clickComment={this.props.clickEdit} clickLike={this.props.clickLike} />
+            <CommentItem comment={comment} clickComment={this.props.clickEdit} clickLike={this.props.clickLike.bind(null, comment.cid)} />
           )
         }
         </div>

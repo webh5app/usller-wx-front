@@ -34,25 +34,36 @@ const mapDispatchToProps = (dispatch) => {
   return {
     initial: function(detail, articleId) {
       if (detail[articleId]) {
-        if (Date.now() - detail[articleId].lastUpdated < settings.article.timeout) {
-          return;
-        }
+        if (Date.now() - detail[articleId].lastUpdated < settings.article.timeout) return;
       }
+
       dispatch(articleDataActions.fetchArticleDetail(articleId));
       dispatch(articleDataActions.fetchCommentList(articleId));
     },
 
-    likeArticle: function(articleId, token) {
-      dispatch(articleDataActions.postArticleLike(articleId, {token: token}));
-      dispatch(articleUIActions.actionArticleAction(articleId, 'like'));
+    likeArticle: function(article, user) {
+      dispatch(articleDataActions.postArticleLike(article.id, `token=${user.token}`));
+
+      if (!article.meta.likeEnable)
+        dispatch(articleUIActions.actionArticleLike(article.id, 'like'));
+
     },
 
-    likeCommend: function(articleId, commentId, token) {
-      dispatch(articleDataActions.postCommentLike(articleId, {cid: commentId, token: token}));
+    likeComment: function(article, comment, cid, user) {
+      dispatch(articleDataActions.postCommentLike(article.id, cid, `token=${user.token}`));
+
+      let _f = true;
+      comment.comment.map((item) => {
+        if (item.cid == cid && item.meta.likeEnable) {
+          _f = false;
+        }
+      });
+      if (_f)
+        dispatch(articleUIActions.actionCommentLike(article.id, cid));
     },
 
-    postComment: function(articleId, body, token) {
-      dispatch(articleDataActions.postComment(articleId, `content=${body}&token=${token}`));
+    postComment: function(article, content, user) {
+      dispatch(articleDataActions.postComment(article.id, `content=${content}&token=${user.token}`))
     },
 
     toArticleList: function() {

@@ -32,11 +32,13 @@ class CommentItem extends React.Component {
           </div>
           <div className={styles.footer}>
             <div className={styles.right}>
-              <div className={styles.clickItem} onClick={this.props.clickComment.bind(null, comment.user.id)}>
-                <span className={classnames('fa', 'fa-comments', styles.icon)} />
-                回复
-              </div>
-              <div className={styles.clickItem} onClick={this.props.clickLike}>
+              { comment.meta.replyEnable ?
+                <div className={styles.clickItem} onClick={this.props.clickComment.bind(null, comment.user.id)}>
+                  <span className={classnames('fa', 'fa-comments', styles.icon)} />
+                  回复
+                </div> : null
+              }
+              <div className={comment.meta.likeEnable ? styles.clickItemActive : styles.clickItem} onClick={this.props.clickLike}>
                 <span className={classnames('fa', 'fa-thumbs-o-up', styles.icon)} />
                 { comment.meta.like }
               </div>

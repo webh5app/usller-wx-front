@@ -21,7 +21,6 @@ class EditTemplate extends React.Component {
 
   clickChange() {
     this.setState({content: this.input.value});
-    console.log("TO: " + this.props.at + "!!Content> " + this.state.content);
   }
 
   renderAt(name) {

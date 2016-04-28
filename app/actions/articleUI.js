@@ -10,23 +10,21 @@ function articleListInvalidedAction(articleId) {
 }
 
 // 对 article 操作
-export const ACTION_ARTICLE = 'ACTION_ARTICLE';
-export function actionArticleAction(articleId, target) {
+export const ACTION_ARTICLE_LIKE = 'ACTION_ARTICLE_LIKE';
+export function actionArticleLike(articleId) {
   return {
-    type: ACTION_ARTICLE,
+    type: ACTION_ARTICLE_LIKE,
     id: articleId,
-    target: target,
   }
 }
 
-// 对 comment 操作
-export const ACTION_COMMENT = 'ACTION_COMMENT';
-export function actionCommentAction(articleId, commentId, target) {
+// 对文章点赞
+export const ACTION_COMMENT_LIKE = 'ACTION_COMMENT_LIKE';
+export function actionCommentLike(articleId, cid) {
   return {
-    type: ACTION_COMMENT,
+    type: ACTION_COMMENT_LIKE,
     id: articleId,
-    cid: commentId,
-    target: target,
+    cid: cid,
   }
 }
 

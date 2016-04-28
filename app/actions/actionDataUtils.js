@@ -32,12 +32,12 @@ export function thunkPostAndGetResult(dispatch, url, sendData, actionCallback) {
 }
 
 // 请求更新数据, 无需任何确认
-export function thunkPutAndNotResult(url, updateData) {
+export function thunkPutAndNotResult(url, sendData) {
   return fetch(url, {
     method: 'post',
     headers: {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify(updateData)
+    body: sendData,
   });
 }

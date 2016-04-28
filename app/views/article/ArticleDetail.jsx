@@ -27,11 +27,11 @@ const DetailHeader = ({article, clickReturn, clickLike, clickShare}) => (
       </span>
     </div>
     <div className={styles.operateWrapper}>
-      <div className={styles.operateItem}>
-        <span className={classnames("fa", "fa-heart-o", styles.icon)} />
+      <div className={styles.operateItem} onClick={clickLike}>
+        <span className={classnames("fa", "fa-heart" + (article.meta.likeEnable ? "" : "-o"), styles.icon)} />
         喜欢
       </div>
-      <div className={styles.operateItem}>
+      <div className={styles.operateItem} onClick={clickShare}>
         <span className={classnames("fa", "fa-share-alt", styles.icon)} />
         分享
       </div>
@@ -67,6 +67,8 @@ class ArticleDetail extends React.Component {
     this.articleShare = this.articleShare.bind(this);
     this.articleEdit = this.articleEdit.bind(this);
 
+    this.likeComment= this.likeComment.bind(this);
+
     // 评论页面
     this.editClose = this.editClose.bind(this);
     this.editChange = this.editChange.bind(this);
@@ -80,8 +82,12 @@ class ArticleDetail extends React.Component {
     this.props.initial(this.props.detail, this.props.params.articleId);
   }
 
+  likeComment(cid) {
+    this.props.likeComment(this.props.article, this.props.comment, cid, this.props.user);
+  }
+
   articleLike() {
-    console.log("Article Like");
+    this.props.likeArticle(this.props.article, this.props.user);
   }
 
   articleShare() {
@@ -105,12 +111,11 @@ class ArticleDetail extends React.Component {
   }
 
   editChange() {
-    console.log('Edit Change');
   }
 
   editSend(data) {
     this.setState({activeEdit: false});
-    this.props.postComment(this.props.article.id, data, this.props.user.token)
+    this.props.postComment(this.props.article, data, this.props.user)
   }
 
   render() {
@@ -138,7 +143,7 @@ class ArticleDetail extends React.Component {
         />
       <DetailContent body={_article.body} />
         {
-          <CommentTemplate commentList={_comment} clickEdit={this.articleEdit} clickLike={this.articleLike}/>
+          <CommentTemplate commentList={_comment} clickEdit={this.articleEdit} clickLike={this.likeComment}/>
         }
         <IconFloatButton
           position={{

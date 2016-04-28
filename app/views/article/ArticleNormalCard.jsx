@@ -14,11 +14,16 @@ class ArticleNormalCard extends React.Component {
   renderLabel() {
     const _now = Date.now();
     const _meta = this.props.meta;
-    const _v = _meta.view * 0.5 + _meta.like * 2 + _meta.comment * 5;
+
     let isNew = false;
     let isHot = false;
 
-    if (_now - _meta.created_at < 24*60*60*1000) isNew = true;
+    // 计算新鲜度
+    const _h = 60*60*1000;
+    if (_now - _meta.created_at < 24*_h) isNew = true;
+
+    // 计算热度
+    const _v = _meta.view * 0.5 + _meta.like * 2 + _meta.comment * 5;
     if (_v > 100) isHot = true;
 
     return (

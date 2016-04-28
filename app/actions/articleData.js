@@ -81,9 +81,8 @@ export function postComment(articleId, data) {
 // 为文章点赞
 export function postArticleLike(articleId, data) {
   const url = `${settings.url.prefix}/article/${articleId}/like/`;
-  return dispatch => {
-    return actionDataUtils.thunkPutAndNotResult(url, data);
-  }
+  return dispatch =>
+    actionDataUtils.thunkPutAndNotResult(url, data);
 }
 
 // 为文章的评论点赞

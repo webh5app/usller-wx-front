@@ -44,11 +44,12 @@
   .footer {
     color: #666;
     font-size: 12px;
-    margin-top: .7rem;
+    margin-top: .5rem;
 
     .right {
       float: right;
 
+      .clickItemActive,
       .clickItem {
         display: inline-block;
 
@@ -56,6 +57,10 @@
           margin-left: 1rem;
           margin-right: 4px;
         }
+      }
+
+      .clickItemActive{
+        color: #30B7F1;
       }
     }
   }

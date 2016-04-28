@@ -159,6 +159,10 @@ export default function article(state=fromJS(listInitialState), action) {
         case settings.fetchStatus.SUCCESS:
           return state
             .set('isFetching', false)
+            .setIn(['detail', action.message.articleId, 'meta', 'comment'], action.message.count)
+            .setIn(['comment', action.message.articleId, 'count'], action.message.count)
+            .setIn(['comment', action.message.articleId, 'lastUpdated'], Date.now())
+            .updateIn(['comment', action.message.articleId+'', 'comment'], (list) =>  list.push(fromJS(action.message.comment)))
 
         case settings.fetchStatus.FAILURE:
           return state
@@ -176,23 +180,26 @@ export default function article(state=fromJS(listInitialState), action) {
       return state
         .set('didInvalided', true);
 
-
-    // id: articleId
-    // type: "like", "view"
-    case articleUIActions.ACTION_ARTICLE:
+    // 对文章 like
+    case articleUIActions.ACTION_ARTICLE_LIKE:
       return state
-        .updateIn(['detail', action.id, 'meta', action.target], (val) => val+1)
-        .updateIn(['detail', action.id, 'meta', `${action.target}Enable`], () => true)
+        .updateIn(['detail', action.id+'', 'meta', 'like'], (val) => val+1)
+        .updateIn(['detail', action.id+'', 'meta', 'likeEnable'], () => true)
 
-    // id: articleId
-    // cid: 0,
-    // type: "like"
-    case articleUIActions.ACTION_COMMENT:
-      return state
-        .getIn(['comment', action.id+"", 'comment'])
-        .find((val) => val.cid === action.cid)
-        .updateIn(['meta', action.type], (val) => val+1)
-        .updateIn(['meta', `${action.type}Enable`], () => true);
+    // 对文章评论 like
+    case articleUIActions.ACTION_COMMENT_LIKE:
+      const _c = state.getIn(['comment', action.id+'']).toJSON();
+      _c.count += 1;
+      _c.lastUpdated = Date.now();
+
+      _c.comment.map((item) => {
+        if (item.cid == action.cid)
+          item.meta.like += 1;
+          item.meta.likeEnable = true;
+          return item;
+      })
+
+      return state.updateIn(['comment', action.id+''], (val) => fromJS(_c));
 
     case articleUIActions.RESET_ERROR:
       return state
