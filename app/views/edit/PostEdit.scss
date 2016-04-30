@@ -1,0 +1,96 @@
+$bgColor: #FBF9F3;
+
+.editContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  background-color: $bgColor;
+}
+
+.editHeader {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08);
+
+  .left {
+    display: inline-block;
+
+    .icon {
+      margin-right: 6px;
+    }
+  }
+
+  .right{
+    float: right;
+
+    .icon {
+      margin-left: 1.4rem;
+    }
+  }
+
+  .send {
+    display: inline-block;
+  }
+
+  .text {
+    display: inline-block;
+    margin-left: 6px;
+  }
+}
+
+.editContent {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.editItem {
+  margin-top: 2rem;
+  color: #444;
+
+  .titleLabel,
+  .contentLabel {
+    display: block;
+    font-weight: bold;
+    color: black;
+  }
+
+  textarea {
+    display: inline-block;
+    margin-top: 1rem;
+    width: 100%;
+    line-height: 1.5;
+    border: 0;
+    resize: none;
+    background-color: $bgColor;
+    letter-spacing: .5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 4px 0 6px 0;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    background-color: $bgColor;
+    outline: none;
+
+    &:focus {
+      border-bottom: 1px solid #30B7F1;
+    }
+  }
+}
+
+.editFooter {
+  padding:1rem;
+}

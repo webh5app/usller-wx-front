@@ -91,7 +91,7 @@ export default function article(state=fromJS(listInitialState), action) {
             lastUpdated: Date.now(),
             title: _article.title,
             bannerImage: _article.bannerImage,
-            body: _article.body,
+            content: _article.content,
             meta: _article.meta,
           });
 
@@ -160,8 +160,8 @@ export default function article(state=fromJS(listInitialState), action) {
           return state
             .set('isFetching', false)
             .setIn(['detail', action.message.articleId, 'meta', 'comment'], action.message.count)
-            .setIn(['comment', action.message.articleId, 'count'], action.message.count)
             .setIn(['comment', action.message.articleId, 'lastUpdated'], Date.now())
+            .updateIn(['comment', action.message.articleId, 'count'], (count) => count + 1)
             .updateIn(['comment', action.message.articleId+'', 'comment'], (list) =>  list.push(fromJS(action.message.comment)))
 
         case settings.fetchStatus.FAILURE:
@@ -193,10 +193,11 @@ export default function article(state=fromJS(listInitialState), action) {
       _c.lastUpdated = Date.now();
 
       _c.comment.map((item) => {
-        if (item.cid == action.cid)
+        if (item.cid == action.cid) {
           item.meta.like += 1;
           item.meta.likeEnable = true;
           return item;
+        }
       })
 
       return state.updateIn(['comment', action.id+''], (val) => fromJS(_c));

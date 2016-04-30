@@ -36,8 +36,13 @@ function updateUserInfoAction(status, info) {
 //     actionDataUtils.thunkPostAndGetResult(dispatch, url, info, fetchUserInfoAction)
 // }
 export function fetchUserToken(info) {
+  // Production
+  const token = document.getElementById('token').getAttribute('data-token');
+  // Test
+  // const token = "43b58b888d849919ffea16d168e688f4b4d8c7a6";
+
   return dispatch =>
-    dispatch(fetchUserTokenAction(settings.fetchStatus.SUCCESS, {token: 'cc5f419af829ddcc77978e07b9efc164f83e6d61'}));
+    dispatch(fetchUserTokenAction(settings.fetchStatus.SUCCESS, {token: token}));
 }
 
 

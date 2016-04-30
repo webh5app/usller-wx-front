@@ -1,27 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import styles from './PostCard.scss';
+import DateTimeSpan from '../../components/DateTimeSpan/DateTimeSpan.jsx';
 
-const cardData = {
-  author: {
-    name: 'Kim Montls',
-    imageURL: 'http://img.wxcha.com/file/201603/28/2722e3ab4c.jpg'
-  },
-  datetime: '27时前',
-  content: {
-    title: '早上吃什么呢?',
-    body: '吃吃吃吃吃吃吃, 狂吃,狂吃, 哈哈哈哈哈哈哈哈哈哈哈'
-  },
-  imageList:  [],
-  meta: {
-    like: 122,
-    comment: 200,
-    view: 1000,
-    cataIcon: 'bullhorn',
-    cataText: '热门'
-  }
-}
+import styles from './PostCard.scss';
 
 class PostCard extends React.Component {
   constructor(props) {
@@ -33,48 +15,33 @@ class PostCard extends React.Component {
       <div className={styles.postSectionContainer} onClick={this.props.click}>
         <div className={styles.cardWrapper}>
           <div className={styles.cardHeader}>
-            <div className={styles.right}>
-              <span className={classnames('fa', 'fa-'+this.props.cardData.meta.cataIcon, styles.icon)} />
-              { this.props.cardData.meta.cataText }
-            </div>
             <div className={styles.left}>
-              <img src={this.props.cardData.author.imageURL} className={styles.authorImage} />
+              <img src={this.props.cardData.user.portrait} className={styles.authorImage} />
               <div className={styles.info}>
                 <div className={styles.authorName}>
-                  {this.props.cardData.author.name}
+                  {this.props.cardData.user.name}
                 </div>
                 <div className={styles.datetime}>
-                  {this.props.cardData.datetime}
+                  <DateTimeSpan datetime={this.props.cardData.meta.datetime} />
                 </div>
               </div>
             </div>
           </div>
           <div className={styles.cardContent}>
             <div className={styles.title}>
-              {this.props.cardData.content.title}
+              {this.props.cardData.title}
             </div>
             <div className={styles.body}>
-              {this.props.cardData.content.body}
+              {this.props.cardData.content}
             </div>
           </div>
           <div className={styles.cardImage}>
-            { this.props.cardData.imageList.map( (image) =>
-              <div className={styles.imageItem} />
-            )}
+          { /* 图片显示 */}
           </div>
           <div className={styles.cardFooter}>
-            <div className={styles.like}>
-              <span className={classnames('fa', 'fa-thumbs-o-up', styles.icon)}/>
-              {this.props.cardData.meta.like}
-            </div>
-            <div className={styles.comment}>
-              <span className={classnames('fa', 'fa-comments', styles.icon)}/>
-              {this.props.cardData.meta.comment}
-            </div>
-            <div className={styles.view}>
-              <span className={classnames('fa', 'fa-eye', styles.icon)}/>
-              {this.props.cardData.meta.view}
-            </div>
+            <span className={styles.view}> {this.props.cardData.meta.view}人看过·</span>
+            <span className={styles.like}> {this.props.cardData.meta.like}人喜欢·</span>
+            <span className={styles.comment}> {this.props.cardData.meta.comment}人评论</span>
           </div>
         </div>
       </div>
@@ -84,28 +51,22 @@ class PostCard extends React.Component {
 
 PostCard.PropTypes = {
   cardData: React.PropTypes.shape({
-    author: React.PropTypes.shape({
+    user: React.PropTypes.shape({
       name: React.PropTypes.string.isRequired,
       imageURL: React.PropTypes.string.isRequired
     }),
-    content: React.PropTypes.shape({
-      title: React.PropTypes.string.isRequired,
-      body: React.PropTypes.string.isRequired
-    }),
-    imageList: React.PropTypes.array.isRequired,
-    content: React.PropTypes.shape({
+    pid: React.PropTypes.number.isRequired,
+    title: React.PropTypes.string.isRequired,
+    content: React.PropTypes.string.isRequired,
+    meta: React.PropTypes.shape({
       view: React.PropTypes.string.isRequired,
       like: React.PropTypes.string.isRequired,
+      likeEnable: React.PropTypes.bool.isRequired,
       comment: React.PropTypes.string.isRequired,
-      cataIcon: React.PropTypes.string.isRequired,
-      cataText: React.PropTypes.string.isRequired,
+      datetime: React.PropTypes.number.isRequired,
     })
   }),
   click: React.PropTypes.func.isRequired,
-}
-
-PostCard.defaultProps = {
-  cardData: cardData
 }
 
 export default PostCard;

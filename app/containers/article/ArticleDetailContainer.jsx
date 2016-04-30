@@ -33,11 +33,13 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     initial: function(detail, articleId) {
+      // 缓存文章
       if (detail[articleId]) {
         if (Date.now() - detail[articleId].lastUpdated < settings.article.timeout) return;
       }
-
       dispatch(articleDataActions.fetchArticleDetail(articleId));
+
+      // 并没有缓存评论
       dispatch(articleDataActions.fetchCommentList(articleId));
     },
 
@@ -63,7 +65,7 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     postComment: function(article, content, user) {
-      dispatch(articleDataActions.postComment(article.id, `content=${content}&token=${user.token}`))
+      dispatch(articleDataActions.postComment(article.id, `content=${content}&token=${user.token}`));
     },
 
     toArticleList: function() {

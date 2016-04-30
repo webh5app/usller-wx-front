@@ -50,9 +50,9 @@ class CommentItem extends React.Component {
                 datetime={comment.meta.datetime}
               />
             </div>
-            <div className={styles.body}>
-              { comment.body }
-            </div>
+          </div>
+          <div className={styles.body}>
+            { comment.content }
           </div>
         </div>
         { comment.response ? this.renderResponse(comment.response) : null }
@@ -62,7 +62,21 @@ class CommentItem extends React.Component {
 };
 
 CommentItem.propTypes = {
-  comment: React.PropTypes.object.isRequired,
+  comment: React.PropTypes.shape({
+    user: React.PropTypes.shape({
+      id: React.PropTypes.number.isRequired,
+      name: React.PropTypes.string.isRequired,
+      portrait: React.PropTypes.string.siRequired,
+    }),
+    content: React.PropTypes.string.isRequired,
+    cid: React.PropTypes.number.isRequired,
+    meta: React.PropTypes.shape({
+      likeEnable: React.PropTypes.bool.isRequired,
+      like: React.PropTypes.number.isRequired,
+      replyEnable: React.PropTypes.bool.isRequired,
+      datetime: React.PropTypes.number.isRequired,
+    }),
+  }),
   clickLike: React.PropTypes.func.isRequired,
   clickComment: React.PropTypes.func.isRequired,
 }

@@ -65,7 +65,7 @@ class ArticleList extends React.Component {
         }
         </div>
         {
-          this.state.isBottom && this.props.isFetching ? <LoadTip info="正在从后台获取数据, 请稍后"/> : null
+          this.state.isBottom && this.props.isFetching ? <LoadTip info="正在获取文章, 请稍后 ... "/> : null
         }
       </div>
     );

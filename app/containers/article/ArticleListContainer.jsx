@@ -22,11 +22,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // 初始化数据
     initial: function(lastUpdated, count) {
       if (count == 0) {
         dispatch(articleDataActions.fetchArticleList(0, settings.article.pagination));
       } else {
+        // 缓存文章列表
         if (Date.now() - lastUpdated > settings.timeout) {
           articleUIActions.articleListInvalided();
           articleDataActions.fetchArticleList(0, count);

@@ -6,8 +6,7 @@ export function thunkFetchAndGetResult(dispatch, url, actionCallback) {
   return fetch(url, {mode: 'cors'})
     .then(response => response.json())
     .then(json => {
-      console.log(json);
-      if (json.meta.error.isError) throw json.meta.error.errorName;
+      if (json.meta.error.errcode != 0 ) throw 'Error';
       dispatch(actionCallback(settings.fetchStatus.SUCCESS, json))
     })
     .catch(message => dispatch(actionCallback(settings.fetchStatus.FAILURE, message)));
@@ -25,7 +24,7 @@ export function thunkPostAndGetResult(dispatch, url, sendData, actionCallback) {
   })
   .then(response => response.json())
   .then(json => {
-    if (json.errcode != 0) throw 'Error';
+    if (json.errcode != 0 ) throw 'Error';
     dispatch(actionCallback(settings.fetchStatus.SUCCESS, json))
   })
   .catch(message => dispatch(actionCallback(settings.fetchStatus.FAILURE, message)));

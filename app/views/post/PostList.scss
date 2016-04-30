@@ -32,13 +32,13 @@
 // 下拉框
 .selectLabel {
   position: absolute;
-  top: 1rem;
+  top: 1.5rem;
   left: 1rem;
   display: inline-block;
   padding: .4rem .7rem;
   background-color: rgba(255,78,78,0.78);
   color: white;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.24);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.24);
   z-index: 1;
   border-radius: 2px;
 
@@ -168,4 +168,8 @@
 
 .editFooter {
   padding:1rem;
+}
+
+.loadTipWrapper {
+  margin-top: 1rem;
 }

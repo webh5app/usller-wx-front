@@ -133,15 +133,17 @@ class ArticleDetail extends React.Component {
       _article.meta = [];
     }
 
+    console.log(_article)
+
     return (
-      <div className={styles.articleDetail}>
+      <div className={styles.articleDetail} style={{minHeight: window.innerHeight}}>
         <DetailHeader
           article={_article}
           clickReturn={this.articleReturn}
           clickLike={this.articleLike}
           clickShare={this.articleShare}
         />
-      <DetailContent body={_article.body} />
+      <DetailContent body={_article.content} />
         {
           <CommentTemplate commentList={_comment} clickEdit={this.articleEdit} clickLike={this.likeComment}/>
         }

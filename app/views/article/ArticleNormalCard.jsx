@@ -20,7 +20,7 @@ class ArticleNormalCard extends React.Component {
 
     // 计算新鲜度
     const _h = 60*60*1000;
-    if (_now - _meta.created_at < 24*_h) isNew = true;
+    if (_now - _meta.created_at < 1*_h) isNew = true;
 
     // 计算热度
     const _v = _meta.view * 0.5 + _meta.like * 2 + _meta.comment * 5;

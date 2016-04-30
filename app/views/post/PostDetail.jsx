@@ -2,92 +2,41 @@ import React from 'react';
 import classnames from 'classnames';
 
 import IconFloatButton from '../../components/IconFloatButton/IconFloatButton.jsx';
+import DateTimeSpan from '../../components/DateTimeSpan/DateTimeSpan.jsx';
 import EditTemplate from '../edit/EditTemplate.jsx';
 import CommentTemplate from '../comment/CommentTemplate.jsx';
 
 import styles from './PostDetail.scss';
 
-const post = {
-  author: {
-    name: 'Kim Montls',
-    imageURL: 'http://img.wxcha.com/file/201603/28/2722e3ab4c.jpg'
-  },
-  datetime: '27时前',
-  content: {
-    title: '早上吃什么呢?',
-    body: '吃吃吃吃吃吃吃, 狂吃,狂吃, 哈哈哈哈哈哈哈哈哈哈哈dsfjaskdlfjaslk;fjsklfg上点击发送点开放家里看;国家可拉伸的价格;阿萨德就干啥的价格可简单概括;爱就是打开;国家贷款;干啥都开了个健康四大;更快乐撒;工具;开朗就;卡时间观看了;手机观看了;十几个删掉个杀手的高科技阿萨德; 撒大哥撒大哥撒大哥阿萨德刚'
-  },
-  imageList:  [],
-  meta: {
-    like: 122,
-    comment: 200,
-    view: 1000,
-    cataIcon: 'bullhorn',
-    cataText: '热门'
-  },
-  commentList: [
-    {
-      author: {
-        name: '你好',
-        imageURL: 'http://img.wxcha.com/file/201603/28/2722e3ab4c.jpg',
-      },
-      datetime: '1小时前',
-      content: 'hi 你好啊',
-      meta: {
-        like: 100,
-      },
-      response: '不是的哦'
-    },
-    {
-      author: {
-        name: '王尼玛',
-        imageURL: 'http://img.wxcha.com/file/201603/28/2722e3ab4c.jpg',
-      },
-      datetime: '3小时前',
-      content: 'hi 你好啊asdf',
-      meta: {
-        like: 1000,
-      }
-    }
-  ]
-}
-
-const PostHeader = ({post}) => (
+const PostHeader = ({post, postLike}) => (
   <div className={styles.postHeader}>
     <div className={styles.info}>
-      <img src={post.author.imageURL} />
-      <div className={styles.cata}>
-        <span className={classnames('fa', 'fa-'+post.meta.cataIcon, styles.icon)} />
-        { post.meta.cataText }
-      </div>
+      <img src={post.user.portrait} />
       <div className={styles.author}>
         <div className={styles.name}>
-          { post.author.name }
+          { post.user.name }
         </div>
         <div className={styles.datetime}>
-          { post.datetime }
+          <DateTimeSpan datetime={post.meta.datetime} />
         </div>
       </div>
     </div>
     <div className={styles.title}>
-      { post.content.title }
+      { post.title }
     </div>
     <div className={styles.body}>
-      { post.content.body }
+      { post.content}
+    </div>
+    <div className={styles.operateWrapper} onClick={postLike}>
+      <div className={styles.likeItem}>
+        <span className={classnames('fa', 'fa-heart' + (post.meta.likeEnable ? '':'-o'), styles.icon)}/>
+        喜欢
+      </div>
     </div>
     <div className={styles.meta}>
-      <div className={styles.metaItem}>
-        <span className={classnames('fa', 'fa-eye', styles.icon)} />
-        {post.meta.view}
-      </div>
-      <div className={styles.metaItem}>
-        <span className={classnames('fa', 'fa-thumbs-o-up', styles.icon)} />
-        {post.meta.like}
-      </div>
-      <div className={styles.metaItem}>
-        <span className={classnames('fa', 'fa-comments', styles.icon)} />
-        {post.meta.comment}
-      </div>
+      <span className={styles.metaItem}>「{post.meta.view}」人看过·</span>
+      <span className={styles.metaItem}>「{post.meta.like}」人喜欢·</span>
+      <span className={styles.metaItem}>「{post.meta.comment}」人评论</span>
     </div>
   </div>
 );
@@ -101,29 +50,41 @@ class PostDetail extends React.Component {
       atName: null,
     }
 
-    this.clickEdit = this.clickEdit.bind(this);
-    this.clickLike = this.clickLike.bind(this);
+    this.postClose = this.postClose.bind(this);
+    this.postLike = this.postLike.bind(this);
+
+    this.commentEdit = this.commentEdit.bind(this);
+    this.commentLike = this.commentLike.bind(this);
+
     this.editSend = this.editSend.bind(this);
     this.editClose = this.editClose.bind(this);
   }
 
   componentDidMount() {
+    this.props.initial(this.props.params.postId);
     window.scrollTo(0,0);
   }
 
-  clickEdit(atName) {
+  postClose() {
+    history.go(-1);
+  }
+
+  postLike() {
+    this.props.postPostLike(this.props.params.postId, this.props.user);
+  }
+
+  commentEdit(atName) {
     this.setState({commentToggled: true, atName: atName});
   }
 
-  clickLike() {
-    // 外部逻辑
-    console.log("Click Like");
+  commentLike(cid) {
+    // NOTE 暂时不上线
+    // this.props.postPostCommentLike(this.props.params.postId, this.props.user, cid)
   }
 
-  editSend(data) {
+  editSend(content) {
+    this.props.postPostComment(this.props.params.postId, this.props.user, content);
     this.setState({commentToggled: false, atName: null});
-    // 提示发送成功
-    // 发送数据给外部逻辑
   }
 
   editClose() {
@@ -131,10 +92,22 @@ class PostDetail extends React.Component {
   }
 
   render() {
+    let _comment = [];
+    let _detail = {
+      user: {},
+      meta: {},
+    };
+
+    if (this.props.comment) _comment = this.props.comment.data;
+
+    if (this.props.detail) _detail = this.props.detail;
+
+    console.log(this.props.detail)
+
     return (
-      <div className={styles.postDetailContainer}>
-        <PostHeader post={post} />
-        <CommentTemplate commentList={post.commentList} clickLike={this.clickLike} clickEdit={this.clickEdit}/>
+      <div className={styles.postDetailContainer} style={{minHeight: window.innerHeight}}>
+        <PostHeader post={_detail} postLike={this.postLike}/>
+        <CommentTemplate commentList={_comment} clickLike={this.commentLike} clickEdit={this.commentEdit}/>
         <div className={styles.floatButtonContainer}>
           <IconFloatButton
             icon="chevron-left"
@@ -144,7 +117,7 @@ class PostDetail extends React.Component {
               zIndex: '100'
             }}
             bgColor='rgba(0,0,0,0.78)'
-            click={this.props.close}
+            click={this.postClose}
           />
           <IconFloatButton
             icon="comments"
@@ -153,8 +126,9 @@ class PostDetail extends React.Component {
               right: '1rem',
               zIndex: '100'
             }}
-            click={this.clickEdit.bind(null, null)}
+            click={this.commentEdit.bind(null, null)}
           />
+
         </div>
         {
           this.state.commentToggled ?

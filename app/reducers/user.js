@@ -26,8 +26,7 @@ export default function user(state=fromJS(userInitial), action) {
           const _id = 1;
           const _name = 'nihao';
           const _portrait = '1';
-          // 解析 token
-          console.log(action.message)
+          // 伪数据
           return state
             .set('isFetching', false)
             .set('token', action.message.token)
