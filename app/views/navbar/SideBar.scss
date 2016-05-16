@@ -42,11 +42,20 @@
 
 .middleWrapper {
   margin-top: 2rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .barItem {
-  padding: 1rem .8rem;
+  padding: 1rem 2rem;
   letter-spacing: 2px;
+
+  .icon {
+    margin-right: .5rem;
+  }
 
   &:hover {
     background-color: #4DB6AC;
@@ -58,8 +67,12 @@
   bottom: 1rem;
   z-index: 108;
 
-  padding: 1rem .8rem;
+  padding: 1rem 2rem;
   letter-spacing: 2px;
+
+  .icon {
+    margin-right: .5rem;
+  }
 }
 
 .maskWrapper {

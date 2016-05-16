@@ -3,6 +3,7 @@ const settings = {
     // prefix: 'http://192.168.42.199:3000/apis/v1',
     // prefix: 'http://www.uberqd.com/apis/v1',
     prefix: '/apis/v1',
+    // prefix: 'http://uberqd.colesmith.space/apis/v1',
   },
 
   article: {

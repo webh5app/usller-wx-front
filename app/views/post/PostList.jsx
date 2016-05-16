@@ -16,16 +16,12 @@ class PostList extends React.Component {
     super(props);
 
     this.state = {
-      labelSelectToggled: false,
-      label: {
-        name: 'home',
-        nick_name: '闲聊',
-        icon: 'home',
-        description: '欢迎PO各种好玩有趣的图片',
-        banner: "https://ooo.0o0.ooo/2016/04/26/57201cd612135.jpg",
+      status: {
+        isBottom: false,
+        isLabelToggled: false,
+        isCommentToggled: false,
       },
-      commentToggled: false,
-      isBottom: false,
+      label: 'home',
     }
 
     this.clickLabel = this.clickLabel.bind(this);
@@ -42,7 +38,11 @@ class PostList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.initial();
+    // get Label List
+    this.props.getLabelList();
+    // get Card data
+    this.props.getLabelData('home');
+
     document.addEventListener('scroll', this.listenScroll, false);
   }
 
@@ -51,15 +51,22 @@ class PostList extends React.Component {
   }
 
   clickLabel() {
-    this.setState({labelSelectToggled: true});
+    const status = Object.assign({}, this.state.status);
+    status.isLabelToggled = true;
+    this.setState({status: status});
   }
 
   clickLabelItem(label) {
-    this.setState({labelSelectToggled: false, label: label});
+    const status = Object.assign({}, this.state.status);
+    status.isLabelToggled = false;
+    this.setState({status: status});
+    this.setState({label: label.name})
   }
 
   closeLabelItem() {
-    this.setState({labelSelectToggled: false});
+    const status = Object.assign({}, this.state.status);
+    status.isLabelToggled = false;
+    this.setState({status: status});
   }
 
   clickCard(id) {
@@ -67,26 +74,36 @@ class PostList extends React.Component {
   }
 
   editNew(atName) {
-    this.setState({commentToggled: true});
+    const status = Object.assign({}, this.state.status);
+    status.isCommentToggled = true;
+    this.setState({status: status});
   }
 
   editSend(title, content) {
-    this.props.postPost(this.state.label.name, this.props.user, title, content);
-    this.setState({commentToggled: false});
+    this.props.postPost(this.state.label, this.props.user, title, content);
+    const status = Object.assign({}, this.state.status);
+    status.isCommentToggled = false;
+    this.setState({status: status});
   }
 
   editClose() {
-    this.setState({commentToggled: false});
+    status.isCommentToggled = false;
+    const status = Object.assign({}, this.state.status);
+    this.setState({status: status});
   }
 
   listenScroll() {
+    const status = Object.assign({}, this.state.status);
+
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !this.state.isBottom) {
-      this.props.addList(this.state.label.name, this.props.post[this.state.label.name].count);
-      this.setState({isBottom: true});
+      this.props.addList(this.state.label, this.props.post[this.state.label].count);
+      status.isBottom = true;
+      this.setState({status: status});
     }
 
     if ((window.innerHeight + window.scrollY ) < document.body.offsetHeight - 200 && this.state.isBottom) {
-      this.setState({isBottom: false});
+      status.isBottom = false;
+      this.setState({status: status});
     };
   }
 
@@ -111,7 +128,17 @@ class PostList extends React.Component {
   render() {
     // cardList 接入
     let cardList = null;
-    const postList = this.props.post[this.state.label.name];
+    let currentLabel = null;
+
+    const postList = this.props.post[this.state.label];
+    const rawCurrentLabel = this.props.label.data.filter((obj) =>
+      obj.name === this.state.label
+    )
+
+    if (rawCurrentLabel.length > 0)
+      currentLabel = rawCurrentLabel[0]
+    else
+      currentLabel = {}
 
     if (!postList) {
       cardList = []
@@ -125,13 +152,13 @@ class PostList extends React.Component {
         <div className={styles.listHeader}>
           <div className={styles.selectLabel} onClick={this.clickLabel}>
             <span className={classnames("fa", "fa-"+this.state.label.icon, styles.icon)} />
-            <span className={styles.text}>{this.state.label.nick_name}</span>
+            <span className={styles.text}>{currentLabel.nick_name}</span>
             <span className={styles.down}></span>
           </div>
-          { this.state.labelSelectToggled? this.renderLabelSelect(this.props.label.data):null }
-          <img src={this.state.label.banner} />
+          { this.state.status.isLabelToggled ? this.renderLabelSelect(this.props.label.data):null }
+          <img src={currentLabel.banner} />
           <div className={styles.navWrapper}>
-          {this.state.label.description}
+          {currentLabel.description}
           </div>
 
         </div>
@@ -140,7 +167,7 @@ class PostList extends React.Component {
         }
 
         { // Post 编辑页面
-          this.state.commentToggled ?
+          this.state.status.isCommentToggled ?
           <PostEdit
             send={this.editSend}
             close={this.editClose}
@@ -158,7 +185,7 @@ class PostList extends React.Component {
         />
         <div className={styles.loadTipWrapper}>
           {
-            this.state.isBottom && this.state.isFetching ? <LoadTip info="正在获取帖子中, 请稍后 ... "/> : null
+            this.state.status.isBottom && this.props.isFetching ? <LoadTip info="正在获取帖子中, 请稍后 ... "/> : null
           }
         </div>
       </div>

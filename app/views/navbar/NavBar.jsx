@@ -35,51 +35,51 @@ const NavFontItem = ({name, description, floatDir='left', active=false}) => (
   </div>
 );
 
-class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      status: 'close',
-    }
-
-    this.clickItem = this.clickItem.bind(this);
-    this.renderSidebar = this.renderSidebar.bind(this);
-  }
-
-  clickItem() {
-    this.setState({status: 'open'});
-  }
-
-  renderSidebar() {
-    return (
-      <div className={styles.SidebarContainer}>
-        <div className={styles.topWrapper}>
-          <span>UBER</span>
-        </div>
-        <div className={styles.middleWrapper}>
-        </div>
-        <div className={styles.bottomWrapper}>
-        </div>
-      </div>
-    )
-  }
-
-  render() {
-    return (
-      <div
-        className={classnames(
-          styles.itemWrapper,
-          styles.iconWrapper
-        )}
-        onClick={this.clickItem}
-      >
-        <span className={"fa fa-bars"} />
-        { this.state.status === 'open' ? this.renderSidebar : null }
-      </div>
-    );
-  }
-}
+// class Sidebar extends React.Component {
+//   constructor(props) {
+//     super(props);
+//
+//     this.state = {
+//       status: 'close',
+//     }
+//
+//     this.clickItem = this.clickItem.bind(this);
+//     this.renderSidebar = this.renderSidebar.bind(this);
+//   }
+//
+//   clickItem() {
+//     this.setState({status: 'open'});
+//   }
+//
+//   renderSidebar() {
+//     return (
+//       <div className={styles.SidebarContainer}>
+//         <div className={styles.topWrapper}>
+//           <span>UBER</span>
+//         </div>
+//         <div className={styles.middleWrapper}>
+//         </div>
+//         <div className={styles.bottomWrapper}>
+//         </div>
+//       </div>
+//     )
+//   }
+//
+//   render() {
+//     return (
+//       <div
+//         className={classnames(
+//           styles.itemWrapper,
+//           styles.iconWrapper
+//         )}
+//         onClick={this.clickItem}
+//       >
+//         <span className={"fa fa-bars"} />
+//         { this.state.status === 'open' ? this.renderSidebar : null }
+//       </div>
+//     );
+//   }
+// }
 
 
 class NavBar extends React.Component {
@@ -101,10 +101,14 @@ class NavBar extends React.Component {
         <Link to="/post">
           <NavFontItem
             name="post"
-            description="帖子"
+            description="社区"
             active={this.props.active}
           />
         </Link>
+        <div className={styles.fixLogo}>
+          <img src="http://7xljtg.com1.z0.glb.clouddn.com/uber-logo-square-bg-black-pure.png" />
+        </div>
+        { /*
         <Link to="account">
           <NavIconItem
             name="account"
@@ -129,6 +133,7 @@ class NavBar extends React.Component {
             active={this.props.active}
           />
         </Link>
+       */ }
       </div>
     );
   }

@@ -67,7 +67,11 @@
 
   .body {
     margin-top: .5rem;
-    color: #4f4f4f;
+    color: #666;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

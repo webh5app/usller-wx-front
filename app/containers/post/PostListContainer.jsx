@@ -20,12 +20,14 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // 初始化
-    initial: function() {
+    getLabelList : function() {
       dispatch(postDataActions.fetchLabel());
-      dispatch(postDataActions.fetchPostList('home', 0, settings.post.pagination))
     },
     clickCard: function(id) {
       hashHistory.push('/post/'+id);
+    },
+    getLabelData: function(label) {
+      dispatch(postDataActions.fetchPostList(label, 0, settings.post.pagination));
     },
     // 碰到底端
     addList: function(tag, count) {

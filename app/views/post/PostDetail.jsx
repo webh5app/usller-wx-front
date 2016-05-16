@@ -102,8 +102,6 @@ class PostDetail extends React.Component {
 
     if (this.props.detail) _detail = this.props.detail;
 
-    console.log(this.props.detail)
-
     return (
       <div className={styles.postDetailContainer} style={{minHeight: window.innerHeight}}>
         <PostHeader post={_detail} postLike={this.postLike}/>

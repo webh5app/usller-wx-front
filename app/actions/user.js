@@ -39,7 +39,7 @@ export function fetchUserToken(info) {
   // Production
   const token = document.getElementById('token').getAttribute('data-token');
   // Test
-  // const token = "43b58b888d849919ffea16d168e688f4b4d8c7a6";
+  // const token = "55b7fe38370fa60e83edce7d3c8c7066449b0f2b";
 
   return dispatch =>
     dispatch(fetchUserTokenAction(settings.fetchStatus.SUCCESS, {token: token}));
