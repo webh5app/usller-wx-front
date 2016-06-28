@@ -21,7 +21,7 @@ class PostList extends React.Component {
         isLabelToggled: false,
         isCommentToggled: false,
       },
-      label: 'home',
+      label: 'chat',
     }
 
     this.clickLabel = this.clickLabel.bind(this);
@@ -41,7 +41,7 @@ class PostList extends React.Component {
     // get Label List
     this.props.getLabelList();
     // get Card data
-    this.props.getLabelData('home');
+    this.props.getLabelData('chat');
 
     document.addEventListener('scroll', this.listenScroll, false);
   }
@@ -57,9 +57,9 @@ class PostList extends React.Component {
   }
 
   clickLabelItem(label) {
+    console.log(label)
     const status = Object.assign({}, this.state.status);
     status.isLabelToggled = false;
-    this.setState({status: status});
     this.setState({label: label.name})
   }
 

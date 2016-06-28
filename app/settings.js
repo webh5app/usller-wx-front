@@ -1,8 +1,8 @@
 const settings = {
   url: {
     // prefix: 'http://192.168.42.199:3000/apis/v1',
-    // prefix: 'http://www.uberqd.com/apis/v1',
-    prefix: '/apis/v1',
+    // prefix: 'https://www.uberqd.com/api/v1',
+    prefix: '/api/v1',
     // prefix: 'http://uberqd.colesmith.space/apis/v1',
   },
 
