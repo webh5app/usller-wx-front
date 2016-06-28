@@ -16,7 +16,7 @@ const TARGET = process.env.npm_lifecycle_event;
 
 const common = {
 	entry: {
-		app: PATHS.app
+		app: ['babel-polyfill', PATHS.app]
 	},
 	output: {
 		path: PATHS.build,

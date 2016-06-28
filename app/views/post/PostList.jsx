@@ -87,8 +87,8 @@ class PostList extends React.Component {
   }
 
   editClose() {
-    status.isCommentToggled = false;
     const status = Object.assign({}, this.state.status);
+    status.isCommentToggled = false;
     this.setState({status: status});
   }
 
